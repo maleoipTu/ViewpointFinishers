@@ -1,0 +1,57 @@
+LOG  : Lua          f:0> [VF-LAB] paired world started
+LOG  : General      f:0> [VF-LAB] Accepted ready prompt in test world
+LOG  : Lua          f:30> [VF-LAB] capture trigger received
+LOG  : Lua          f:210> [VF-LAB] case=Sweep spawned alive=true
+LOG  : Lua          f:390> [VF-LAB] case=Sweep selected=VF_Player_Sweep valid=true state=idle
+LOG  : Lua          f:390> [VF] queued VF_Player_Sweep
+LOG  : Lua          f:390> [VF-LAB] state=idle death= playing=false
+LOG  : Lua          f:419> [VF] start VF_Player_Sweep
+LOG  : Lua          f:496> [VF] impact VF_Player_Sweep alive=false
+LOG  : Lua          f:496> [VF-LAB] state=face-target death=Sweep playing=false
+LOG  : Lua          f:497> [VF-LAB] state=falldown death=Sweep playing=false
+LOG  : Lua          f:498> [VF-LAB] state=falldown-speardeath1 death=Sweep playing=false
+LOG  : Lua          f:615> [VF] resting pose Sweep
+LOG  : Lua          f:618> [VF] finished
+LOG  : Lua          f:618> [VF-LAB] RESULT Sweep deathObserved=true active=false
+LOG  : Lua          f:858> [VF-LAB] case=Shove spawned alive=true
+LOG  : Lua          f:1038> [VF-LAB] case=Shove selected=VF_Player_Shove valid=true state=idle
+LOG  : Lua          f:1038> [VF] start VF_Player_Shove
+LOG  : Lua          f:1038> [VF] queued VF_Player_Shove
+LOG  : Lua          f:1038> [VF-LAB] state=idle death= playing=false
+LOG  : Lua          f:1112> [VF] impact VF_Player_Shove alive=false
+LOG  : Lua          f:1113> [VF-LAB] state=falldown death=Shove playing=false
+LOG  : Lua          f:1114> [VF-LAB] state=falldown-speardeath1 death=Shove playing=false
+LOG  : Lua          f:1244> [VF] finished
+LOG  : Lua          f:1244> [VF-LAB] RESULT Shove deathObserved=true active=false
+LOG  : Lua          f:1246> [VF] resting pose Shove
+LOG  : Lua          f:1484> [VF-LAB] case=Neck spawned alive=true
+LOG  : Lua          f:1664> [VF-LAB] case=Neck selected=VF_Player_Neck valid=true state=idle
+LOG  : Lua          f:1664> [VF] start VF_Player_Neck
+LOG  : Lua          f:1664> [VF] queued VF_Player_Neck
+LOG  : Lua          f:1664> [VF-LAB] state=idle death= playing=false
+LOG  : Lua          f:1820> [VF] impact VF_Player_Neck alive=false
+LOG  : Lua          f:1821> [VF-LAB] state=falldown death=Neck playing=false
+LOG  : Lua          f:1822> [VF-LAB] state=falldown-speardeath1 death=Neck playing=false
+LOG  : Lua          f:2023> [VF] resting pose Neck
+LOG  : Lua          f:2028> [VF] finished
+LOG  : Lua          f:2028> [VF-LAB] RESULT Neck deathObserved=true active=false
+LOG  : Lua          f:2268> [VF-LAB] case=Knee spawned alive=true
+LOG  : Lua          f:2448> [VF-LAB] case=Knee selected=VF_Player_Knee valid=true state=idle
+LOG  : Lua          f:2448> [VF] start VF_Player_Knee
+LOG  : Lua          f:2448> [VF] queued VF_Player_Knee
+LOG  : Lua          f:2448> [VF-LAB] state=idle death= playing=false
+LOG  : Lua          f:2654> [VF] impact VF_Player_Knee alive=false
+LOG  : Lua          f:2655> [VF-LAB] state=falldown death=Knee playing=false
+LOG  : Lua          f:2656> [VF-LAB] state=falldown-speardeath1 death=Knee playing=false
+LOG  : Lua          f:2819> [VF] resting pose Knee
+LOG  : Lua          f:2824> [VF] finished
+LOG  : Lua          f:2824> [VF-LAB] RESULT Knee deathObserved=true active=false
+LOG  : Lua          f:3064> [VF-LAB] case=Knife spawned alive=true
+LOG  : Lua          f:3244> [VF-LAB] case=Knife selected=VF_Player_Knife valid=true state=onground
+LOG  : Lua          f:3244> [VF] queued VF_Player_Knife
+LOG  : Lua          f:3244> [VF-LAB] state=onground death= playing=false
+LOG  : Lua          f:3316> [VF] start VF_Player_Knife
+LOG  : Lua          f:3457> [VF] impact VF_Player_Knife alive=false
+LOG  : Lua          f:3679> [VF] finished
+LOG  : Lua          f:3679> [VF-LAB] RESULT Knife deathObserved=true active=false
+LOG  : Lua          f:3919> [VF-LAB] ALL CASES FINISHED

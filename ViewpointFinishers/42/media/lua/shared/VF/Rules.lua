@@ -4,6 +4,8 @@ local R = VF.Rules
 R.range = 1.25
 R.minimumEndurance = 0.12
 R.profiles = {
+    sweep = {anim="VF_Player_Sweep",victim="Sweep",cost=0.08,label="Sweep",distance=0.56,bareHands=true},
+    shove = {anim="VF_Player_Shove",victim="Shove",cost=0.08,label="Shove",distance=0.53,bareHands=true,front=true},
     neck = {anim="VF_Player_Neck",victim="Neck",cost=0.07,label="Neck",distance=0.65},
     knee = {anim="VF_Player_Knee",victim="Knee",cost=0.09,label="Knee",distance=0.72},
     groundknife = {anim="VF_Player_Knife",victim="Knife",cost=0.055,label="GroundKnife",distance=1.0},
@@ -66,20 +68,21 @@ function R.relativeSide(p,z)
     return (dx*z:getForwardDirectionX()+dy*z:getForwardDirectionY())/length
 end
 
-function R.selectProfile(p,z)
+function R.selectProfile(p,z,alternate)
     if not z:isOnFloor() then
         local side=R.relativeSide(p,z)
-        if side < -0.45 then return R.profiles.neck end
-        if side > 0.45 then return R.profiles.knee end
+        if side < -0.45 then return alternate and R.profiles.sweep or R.profiles.neck end
+        if side > 0.45 then return alternate and R.profiles.shove or R.profiles.knee end
         return nil
     end
+    if alternate then return nil end
     local profile=R.profile(p:getPrimaryHandItem())
     if profile==R.profiles.knife and not z:isFallOnFront() then return R.profiles.groundknife end
     return profile
 end
 
 function R.anchor(z,profile)
-    local sign=profile==R.profiles.knee and 1 or -1
+    local sign=(profile==R.profiles.knee or profile.front) and 1 or -1
     return z:getX()+z:getForwardDirectionX()*profile.distance*sign,
            z:getY()+z:getForwardDirectionY()*profile.distance*sign
 end

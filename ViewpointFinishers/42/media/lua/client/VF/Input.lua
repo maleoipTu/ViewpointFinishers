@@ -10,7 +10,7 @@ local function message(p,key)
     if p then HaloTextHelper.addText(p,getText("UI_VF_"..key)) end
 end
 
-function VF.tryFinish(p,target)
+function VF.tryFinish(p,target,alternate)
     if not p then return end
     if isClient() or isServer() then message(p,"SinglePlayer"); return end
     if VF.active[p] then return end
@@ -21,7 +21,7 @@ function VF.tryFinish(p,target)
     end
     target = target or VF.Rules.closest(p,getCell():getZombieList())
     if not VF.Rules.targetValid(p,target) then message(p,"NoTarget"); return end
-    local profile=VF.Rules.selectProfile(p,target)
+    local profile=VF.Rules.selectProfile(p,target,alternate) or VF.Rules.selectProfile(p,target)
     if not profile then message(p,"Side"); return end
     if profile.victim and not VF.Rules.aligned(p,target,profile) then
         local x,y=VF.Rules.anchor(target,profile)
@@ -38,7 +38,7 @@ end
 Events.OnKeyPressed.Add(function(key)
     if key ~= getCore():getKey("VF_Finish") then return end
     if isGamePaused() then return end
-    VF.tryFinish(getSpecificPlayer(0))
+    VF.tryFinish(getSpecificPlayer(0),nil,isShiftKeyDown())
 end)
 
 Events.OnFillWorldObjectContextMenu.Add(function(playerNum,context,worldobjects,test)
@@ -50,4 +50,6 @@ Events.OnFillWorldObjectContextMenu.Add(function(playerNum,context,worldobjects,
     local profile = VF.Rules.selectProfile(p,z)
     if not profile then return end
     context:addOption(getText("ContextMenu_VF_"..profile.label),p,VF.tryFinish,z)
+    local alternate=VF.Rules.selectProfile(p,z,true)
+    if alternate then context:addOption(getText("ContextMenu_VF_"..alternate.label),p,VF.tryFinish,z,true) end
 end)

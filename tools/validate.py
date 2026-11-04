@@ -9,7 +9,7 @@ game=Path(r"C:\Program Files (x86)\Steam\steamapps\common\ProjectZomboid")
 clips={p.stem.lower() for p in (game/"media/anims_X").rglob("*") if p.is_file()}
 custom={p.stem.lower() for p in (mod/"42/media/anims_X").rglob("*.x")}
 nodes=list((mod/"42/media/AnimSets").rglob("*.xml"))
-assert len(nodes)==47
+assert len(nodes)==73 and len(custom)==15
 names=set()
 for path in nodes:
     node=ET.parse(path).getroot()

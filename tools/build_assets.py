@@ -107,8 +107,8 @@ texts = {
 }
 texts["RU"]["UI"]["Side"]="Для захвата подойдите сзади; для подсечки — спереди."
 texts["EN"]["UI"]["Side"]="Approach from behind for a neck hold, or from the front for a leg kick."
-texts["RU"]["ContextMenu"].update({"Neck":"Захват сзади: свернуть шею","Knee":"Ударить по ноге и добить в голову","GroundKnife":"Прижать лежащего и добить ножом"})
-texts["EN"]["ContextMenu"].update({"Neck":"Rear neck takedown","Knee":"Leg kick and finishing strike","GroundKnife":"Pin and finish with knife"})
+texts["RU"]["ContextMenu"].update({"Sweep":"Подсечь сзади, придерживая за плечо","Shove":"Сбить с ног толчком в грудь","Neck":"Захват сзади: свернуть шею","Knee":"Ударить по ноге и добить в голову","GroundKnife":"Прижать лежащего и добить ножом"})
+texts["EN"]["ContextMenu"].update({"Sweep":"Rear hook sweep","Shove":"Two-palm knockdown","Neck":"Rear neck takedown","Knee":"Leg kick and finishing strike","GroundKnife":"Pin and finish with knife"})
 for language, groups in texts.items():
     directory = MEDIA / "lua/shared/Translate" / language
     directory.mkdir(parents=True,exist_ok=True)

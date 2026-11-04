@@ -3,8 +3,10 @@ require "VF/Input"
 local tick,started=0,false
 local runRequested=false
 local caseIndex,phase,victim,deadline=0,"waiting",nil,180
-local cases={"Neck","Knee","Knife"}
+local cases={"Sweep","Shove","Neck","Knee","Knife"}
 local lastVictimState=nil
+local recordFrames,nextFrame,lastActive=false,0,0
+local sawAction,sawDeath=false,false
 local scenario={
  name="VF paired choreography verification",
  startLoc={x=10649,y=10635,z=0},
@@ -33,7 +35,12 @@ Events.OnTick.Add(function()
  if not runRequested then
   if tick%30==0 then
    local file=getFileReader("vf-run.txt",false)
-   if file then file:close(); runRequested=true; deadline=tick+180; print("[VF-LAB] capture trigger received") end
+   if file then
+    file:close(); runRequested=true; deadline=tick+180
+    local record=getFileReader("vf-record.txt",false)
+    if record then record:close(); recordFrames=true end
+    print("[VF-LAB] capture trigger received")
+   end
   end
   return
  end
@@ -46,11 +53,14 @@ Events.OnTick.Add(function()
   local spawned=addZombiesInOutfit(math.floor(p:getX())+1,math.floor(p:getY()),0,1,"Generic01",50,false,false,false,false,false,false,1,false,0,false,false)
   if not spawned or spawned:size()==0 then print("[VF-LAB] SPAWN FAILED"); phase="done"; return end
   victim=spawned:get(0)
+  sawAction,sawDeath=false,false
   lastVictimState=nil
-  local distance=cases[caseIndex]=="Neck" and .65 or (cases[caseIndex]=="Knee" and .72 or 1.0)
+  local distances={Sweep=.56,Shove=.53,Neck=.65,Knee=.72,Knife=1.0}
+  local distance=distances[cases[caseIndex]]
+  local front=cases[caseIndex]=="Knee" or cases[caseIndex]=="Shove"
   victim:setX(p:getX()+distance); victim:setY(p:getY())
-  victim:setForwardDirection(cases[caseIndex]=="Knee" and -1 or 1,0)
-  victim:setDirectionAngle(cases[caseIndex]=="Knee" and 180 or 0)
+  victim:setForwardDirection(front and -1 or 1,0)
+  victim:setDirectionAngle(front and 180 or 0)
   victim:setUseless(true)
   if cases[caseIndex]=="Knife" then
    victim:setFallOnFront(false); victim:setAlwaysKnockedDown(true); victim:knockDown(false)
@@ -58,17 +68,30 @@ Events.OnTick.Add(function()
   phase="prepare"; deadline=tick+180
   print("[VF-LAB] case="..cases[caseIndex].." spawned alive="..tostring(victim:isAlive()))
  elseif phase=="prepare" and tick>=deadline then
-  local profile=VF.Rules.selectProfile(p,victim)
+  local alternate=cases[caseIndex]=="Sweep" or cases[caseIndex]=="Shove"
+  local profile=VF.Rules.selectProfile(p,victim,alternate)
   print("[VF-LAB] case="..cases[caseIndex].." selected="..tostring(profile and profile.anim).." valid="..tostring(VF.Rules.targetValid(p,victim)).." state="..victim:getActionStateName())
   if not victim:isAlive() then print("[VF-LAB] FAIL: target died before test"); phase="done"; return end
   if cases[caseIndex]=="Knife" and not VF.Rules.targetValid(p,victim) then deadline=tick+120; return end
-  VF.tryFinish(p,victim)
+  VF.tryFinish(p,victim,alternate)
   phase="verify"; deadline=tick+600
- elseif phase=="verify" and tick>=deadline then
-  print("[VF-LAB] RESULT "..cases[caseIndex].." alive="..tostring(victim:isAlive()).." active="..tostring(VF.active[p]~=nil))
-  phase="waiting"; deadline=tick+120
+ elseif phase=="verify" and (tick>=deadline or (sawAction and not VF.active[p])) then
+  -- The engine recycles zombie objects. Record the death during this action,
+  -- before the same object can represent a different living zombie.
+  print("[VF-LAB] RESULT "..cases[caseIndex].." deathObserved="..tostring(sawDeath).." active="..tostring(VF.active[p]~=nil))
+  phase="waiting"; deadline=tick+240
  end
  if victim and phase=="verify" then
+  sawAction=sawAction or VF.active[p]~=nil
+  sawDeath=sawDeath or not victim:isAlive()
+  if recordFrames and (cases[caseIndex]=="Sweep" or cases[caseIndex]=="Shove") then
+   local now=getTimestampMs()
+   if VF.active[p] then lastActive=now end
+   if now-lastActive<250 and now>=nextFrame then
+    nextFrame=now+260
+    getCore():TakeFullScreenshot(string.format("vf040-%s-%.0f.png",cases[caseIndex],now))
+   end
+  end
   local st=victim:getActionStateName()
   if st~=lastVictimState then
    lastVictimState=st

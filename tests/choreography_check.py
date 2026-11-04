@@ -3,17 +3,25 @@ import sys,json
 from pathlib import Path
 import numpy as np
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
-from choreography import skeleton,make_pose,TIMING
+from choreography import skeleton,make_pose,TIMING,PAIR_OFFSET,FRONT_FACING
 bones=skeleton();results={}
 for kind,(duration,impact) in TIMING.items():
     p=make_pose(bones,kind,'Player',impact)
     v=make_pose(bones,kind,'Victim',impact)
     head=v.pos('Bip01_Head')+np.array([0,.045 if kind=='Neck' else .025,0])
-    if kind=='Knee':head[[0,2]]*=-1
-    head[2]-={'Neck':.325,'Knee':.36,'Knife':.5}[kind]
+    if kind=='Shove':
+        head=v.pos('Bip01_Spine1')+np.array([0,.035,-.04])
+    if kind=='Sweep':
+        head=v.pos('Bip01_R_Calf')+np.array([.015,-.075,.015])
+    if kind in FRONT_FACING:head[[0,2]]*=-1
+    head[2]-=PAIR_OFFSET[kind]
     distances={side:float(np.linalg.norm(p.pos('Bip01_'+side+'_Hand')-head)) for side in ['L','R']}
-    assert distances['R']<(.15 if kind=='Knife' else .10),(kind,distances)
-    if kind=='Neck':assert distances['L']<.10,distances
+    if kind=='Sweep':
+        distances={'boot_to_lower_leg':float(np.linalg.norm(p.pos('Bip01_R_Foot')-head))}
+        assert distances['boot_to_lower_leg']<.07,distances
+    else:
+        assert distances['R']<(.15 if kind=='Knife' else .10),(kind,distances)
+        if kind in ('Neck','Shove'):assert distances['L']<.10,distances
     final=make_pose(bones,kind,'Victim',duration)
     lowest=min(final.pos(b['name'])[1] for b in bones if b['name'].endswith(('_Hand','_Foot','_Head')))
     assert lowest>-.005,(kind,lowest)
@@ -39,7 +47,7 @@ for kind,(duration,impact) in TIMING.items():
         previous=local
     assert worst_wrist<26,(kind,'wrist overextension',worst_wrist)
     assert worst_step<35,(kind,'arm flip between adjacent frames',worst_step)
-    results[kind]={'hand_contact_distance_rig_units':distances,'resting_lowest_joint':float(lowest),'entry_matches_recovery':True,'impact_to_death_continuous':True,'max_wrist_rotation_degrees':worst_wrist,'max_arm_step_degrees_at_30fps':worst_step}
+    results[kind]={'contact_distance_rig_units':distances,'resting_lowest_joint':float(lowest),'entry_matches_recovery':True,'impact_to_death_continuous':True,'max_wrist_rotation_degrees':worst_wrist,'max_arm_step_degrees_at_30fps':worst_step}
     if kind=='Neck':
         # Once the head is released, elbows must drop below the shoulders
         # and stay near the ribs, rather than holding a raised wing pose.

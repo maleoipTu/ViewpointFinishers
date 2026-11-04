@@ -1,5 +1,5 @@
 name=Viewpoint Finishers
 id=ViewpointFinishers
-description=Contextual finishers on K: rear neck hold, leg kick with finishing strike, and grounded knife finisher. Refined hand contact, planted feet, smooth recovery and three continuous death animations. Single-player for Build 42.21.0 and Project Viewpoint.
-modversion=0.3.1
+description=Five contextual finishers. K: rear neck hold, leg kick, grounded knife. Shift+K: rear hook sweep or front two-palm knockdown. Single-player for Build 42.21.0 and Project Viewpoint.
+modversion=0.4.0
 versionMin=42.21.0

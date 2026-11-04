@@ -1,6 +1,6 @@
 {
   "Neck": {
-    "hand_contact_distance_rig_units": {
+    "contact_distance_rig_units": {
       "L": 0.05643580423808983,
       "R": 0.06284902544988269
     },
@@ -13,7 +13,7 @@
     "release_min_elbow_drop": 0.10173894151453
   },
   "Knee": {
-    "hand_contact_distance_rig_units": {
+    "contact_distance_rig_units": {
       "L": 0.261904049461477,
       "R": 0.00943097254982759
     },
@@ -24,7 +24,7 @@
     "max_arm_step_degrees_at_30fps": 25.756860395151794
   },
   "Knife": {
-    "hand_contact_distance_rig_units": {
+    "contact_distance_rig_units": {
       "L": 0.11470754465892283,
       "R": 0.10545335052232471
     },
@@ -33,5 +33,26 @@
     "impact_to_death_continuous": true,
     "max_wrist_rotation_degrees": 25.00000000000005,
     "max_arm_step_degrees_at_30fps": 27.38124278753842
+  },
+  "Sweep": {
+    "contact_distance_rig_units": {
+      "boot_to_lower_leg": 3.5652682413747997e-16
+    },
+    "resting_lowest_joint": 0.035000047440039955,
+    "entry_matches_recovery": true,
+    "impact_to_death_continuous": true,
+    "max_wrist_rotation_degrees": 15.99975613473557,
+    "max_arm_step_degrees_at_30fps": 18.7982862598565
+  },
+  "Shove": {
+    "contact_distance_rig_units": {
+      "L": 0.06000000000000001,
+      "R": 0.059999999999999984
+    },
+    "resting_lowest_joint": 0.03500004181871774,
+    "entry_matches_recovery": true,
+    "impact_to_death_continuous": true,
+    "max_wrist_rotation_degrees": 12.50000000000006,
+    "max_arm_step_degrees_at_30fps": 19.08752741313192
   }
 }

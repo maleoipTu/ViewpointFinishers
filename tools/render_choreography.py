@@ -16,7 +16,7 @@ scene.world.color=(.2,.2,.2)
 
 def material(name,color):
     m=bpy.data.materials.new(name); m.diffuse_color=(*color,1)
-    m.use_nodes=True; m.node_tree.nodes.get('Principled BSDF').inputs['Base Color'].default_value=(*color,1)
+    # Workbench uses diffuse_color in MATERIAL mode, including localized Blender installs.
     return m
 actor=material('Player blue',(.08,.40,.65)); victim=material('Zombie rust',(.52,.15,.08))
 floor=material('Ground',(.15,.18,.20))
@@ -34,8 +34,8 @@ objects=[]
 def point(matrices,name,role,kind):
     m=matrices[ids[name]]; x,y,z=[m[i][3] for i in range(3)]
     if role=='Victim':
-        if kind=='Knee': x,z=-x,-z
-        z-= {'Neck':.325,'Knee':.36,'Knife':.5}[kind]
+        if kind in ('Knee','Shove'): x,z=-x,-z
+        z-= {'Neck':.325,'Knee':.36,'Knife':.5,'Sweep':.28,'Shove':.265}[kind]
     return Vector((x,-z,y))
 
 def clear():

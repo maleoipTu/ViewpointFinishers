@@ -15,7 +15,8 @@ function A:isValid()
     if self.struck then return true end -- let recovery play after the body is removed
     return VF.Rules.targetValid(p,self.target)
         and VF.Rules.aligned(p,self.target,self.profile)
-        and (self.started or VF.Rules.selectProfile(p,self.target)==self.profile)
+        and (self.started or VF.Rules.selectProfile(p,self.target)==self.profile
+            or VF.Rules.selectProfile(p,self.target,true)==self.profile)
         and p:getStats():get(CharacterStat.ENDURANCE) >= (self.started and 0 or VF.Rules.minimumEndurance)
 end
 
@@ -44,7 +45,7 @@ function A:start()
     VF.active[self.character] = self
     self.character:getStats():remove(CharacterStat.ENDURANCE,self.profile.cost)
     self:setActionAnim(self.profile.anim)
-    if self.profile == VF.Rules.profiles.stomp or self.profile == VF.Rules.profiles.neck or self.profile == VF.Rules.profiles.knee then
+    if self.profile.bareHands or self.profile == VF.Rules.profiles.stomp or self.profile == VF.Rules.profiles.neck or self.profile == VF.Rules.profiles.knee then
         self:setOverrideHandModels(nil,nil)
     else
         self:setOverrideHandModels(self.held,self.character:getSecondaryHandItem())
@@ -92,7 +93,7 @@ function A:animEvent(event, parameter)
             self.target:clearVariable("VF_DeathPlaying")
         end
         local weapon = self.held
-        if self.profile == VF.Rules.profiles.stomp or self.profile == VF.Rules.profiles.rifle
+        if self.profile.bareHands or self.profile == VF.Rules.profiles.stomp or self.profile == VF.Rules.profiles.rifle
             or self.profile == VF.Rules.profiles.handgun or self.profile == VF.Rules.profiles.neck or self.profile == VF.Rules.profiles.knee then
             weapon = instanceItem("Base.BareHands")
         end

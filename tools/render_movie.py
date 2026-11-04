@@ -10,7 +10,7 @@ scene.display.shading.show_cavity=True
 scene.render.resolution_x=640; scene.render.resolution_y=480
 scene.render.fps=30
 timeline=[]
-for kind in ['Neck','Knee','Knife']:
+for kind in ['Neck','Knee','Knife','Sweep','Shove']:
     clip=data['clips']['VF_Player_'+kind]
     timeline.extend((kind,i) for i in range(len(clip['world'])))
 scene.frame_start=1; scene.frame_end=len(timeline); scene.frame_step=3

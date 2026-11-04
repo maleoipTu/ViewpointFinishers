@@ -115,4 +115,13 @@ z.VF_DeathDone="true";z.state="falldown-speardeath1";TEST_TICK()
 check(z.ragdoll and VF.deaths[z].posed,"resting pose preserved for native corpse")
 z.square=nil;TEST_TICK()
 check(not VF.deaths[z] and not z.VF_Death and z.hitReaction=="","death reaction cleared before pooled zombie is reused")
+for _,case in ipairs({{"sweep",-.56},{"shove",.53}}) do
+    p,z=pair(); z.floor=false; z.state="idle"; p.x=z.x+case[2]
+    local profile=VF.Rules.selectProfile(p,z,true)
+    check(profile==VF.Rules.profiles[case[1]] and VF.Rules.aligned(p,z,profile),"alternate selection and anchor")
+    a=VF.FinishAction:new(p,z,profile); a:start()
+    check(a.started and z.VF_Pair==profile.victim,"alternate pair synchronized")
+    a:animEvent("VF_Impact",""); a:animEvent("VF_Impact",""); a:animEvent("VF_Finished","")
+    check(z.hits==1 and z.VF_Death==profile.victim and not VF.active[p],"one impact and clean recovery")
+end
 print("BEHAVIOR TESTS: "..passed.." passed")

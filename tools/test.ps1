@@ -7,7 +7,7 @@ New-Item -ItemType Directory -Path $classes -Force | Out-Null
 if($LASTEXITCODE -ne 0) { throw 'Harness compilation failed' }
 Push-Location $GamePath
 try {
-    & "$GamePath\jre64\bin\java.exe" '-Dfile.encoding=UTF-8' '-Dstdout.encoding=UTF-8' -cp "$classes;$GamePath\projectzomboid.jar" LuaCheck "$workspace\tests\bootstrap.lua" "$workspace\ViewpointFinishers\42\media\lua\shared\VF\Rules.lua" "$workspace\ViewpointFinishers\42\media\lua\client\VF\FinishAction.lua" "$workspace\tests\behavior.lua"
+    & "$GamePath\jre64\bin\java.exe" '-Dfile.encoding=UTF-8' '-Dstdout.encoding=UTF-8' -cp "$classes;$GamePath\projectzomboid.jar" LuaCheck "$workspace\tests\bootstrap.lua" "$workspace\ViewpointFinishers\42\media\lua\shared\VF\Rules.lua" "$workspace\ViewpointFinishers\42\media\lua\client\VF\FinishAction.lua" "$workspace\tests\behavior.lua" "$workspace\ViewpointFinishers\42\media\lua\client\VF\Input.lua" "$workspace\tests\input_check.lua"
     if($LASTEXITCODE -ne 0) { throw 'Lua behavior tests failed' }
 } finally { Pop-Location }
 & 'C:\Program Files\Microsoft\jdk-21.0.12.101-hotspot\bin\javac.exe' -d $classes "$workspace\tests\InspectAnimation.java"

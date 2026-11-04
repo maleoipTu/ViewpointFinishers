@@ -5,7 +5,10 @@ import numpy as np
 
 ROOT=Path(__file__).resolve().parents[1]
 GAME=Path(r'C:\Program Files (x86)\Steam\steamapps\common\ProjectZomboid')
-TIMING={'Neck':(3.1,1.30),'Knee':(3.2,1.72),'Knife':(3.1,1.18)}
+TIMING={'Neck':(3.1,1.30),'Knee':(3.2,1.72),'Knife':(3.1,1.18),
+        'Sweep':(2.8,1.10),'Shove':(2.6,.90)}
+PAIR_OFFSET={'Neck':.325,'Knee':.36,'Knife':.5,'Sweep':.28,'Shove':.265}
+FRONT_FACING={'Knee','Shove'}
 
 def skeleton():
     source=(GAME/'media/anims_X/Bob/Bob_AttackFloorStamp.x').read_text()
@@ -146,7 +149,16 @@ def base_pose(bones,kind,role,t):
     p=Pose(bones)
     feet=[p.pos('Bip01_L_Foot'),p.pos('Bip01_R_Foot')]
     hands=[p.pos('Bip01_L_Hand'),p.pos('Bip01_R_Hand')]
-    if kind=='Neck' and role=='Player':
+    if kind in ('Sweep','Shove') and role=='Victim':
+        # Brace on planted feet before contact. The fall starts from this pose.
+        brace=float(curve(t,[(0,0),(.32,0),(TIMING[kind][1],1)]))
+        p.translate('Bip01',np.array([.025 if kind=='Sweep' else 0,-.035,.012])*brace)
+        p.rotate('Bip01_Spine',rot([0,0,1] if kind=='Sweep' else [1,0,0],.14*brace))
+        p.legs(*feet)
+        for side,sign in [('L',1),('R',-1)]:
+            p.rotate('Bip01_'+side+'_UpperArm',rot([1,0,0],.34*brace))
+            p.rotate('Bip01_'+side+'_Forearm',rot([0,0,1],sign*.18*brace))
+    elif kind=='Neck' and role=='Player':
         reach=float(curve(t,[(0,0),(.55,1),(1.6,1),(2.6,0)]))
         twist=float(curve(t,[(0,0),(.95,0),(1.25,1),(1.6,.7),(2.5,0)]))
         p.translate('Bip01',np.array([-.025*twist,-.025*reach,-.065*reach]))
@@ -233,7 +245,17 @@ def blend_pose(a,b,u):
 def landing_pose(bones,kind):
     if kind=='Knife':return base_pose(bones,kind,'Victim',2.7)
     p=Pose(bones)
-    if kind=='Neck':
+    if kind=='Shove':
+        p.rotate('Bip01',rot([0,1,0],.12)@rot([1,0,0],math.pi/2))
+        p.rotate('Bip01_L_Calf',rot([1,0,0],-.48))
+        p.rotate('Bip01_Head',rot([0,1,0],-.25))
+        target=np.array([-.035,.105,.27])
+    elif kind=='Sweep':
+        p.rotate('Bip01',rot([0,1,0],.35)@rot([0,0,1],math.pi/2))
+        p.rotate('Bip01_R_Thigh',rot([0,1,0],-.55))
+        p.rotate('Bip01_R_Calf',rot([0,1,0],.95))
+        target=np.array([-.21,.105,-.045])
+    elif kind=='Neck':
         p.rotate('Bip01',rot([0,1,0],-.22)@rot([1,0,0],-math.pi/2))
         target=np.array([.05,.105,-.24])
         p.rotate('Bip01_Head',rot([0,1,0],.5))
@@ -267,10 +289,45 @@ def make_pose(bones,kind,role,t):
     victim=make_pose(bones,kind,'Victim',min(t,impact))
     def contact(name,offset=(0,0,0)):
         v=victim.pos(name)+np.array(offset)
-        if kind=='Knee':v[0]=-v[0];v[2]=-v[2]
-        v[2]-={'Neck':.325,'Knee':.36,'Knife':.5}[kind]
+        if kind in FRONT_FACING:v[0]=-v[0];v[2]=-v[2]
+        v[2]-=PAIR_OFFSET[kind]
         return v
-    if kind=='Neck':
+    if kind=='Sweep':
+        # Weight over the left foot. The right boot hooks across the lower
+        # leg while the left palm steadies the far shoulder, then releases.
+        load=float(curve(t,[(0,0),(.56,1),(impact,.9),(1.52,.5),(2.30,0)]))
+        turn=float(curve(t,[(0,0),(.55,-.16),(impact,.31),(1.38,.26),(2.25,0)]))
+        p.translate('Bip01',np.array([.053,-.063,-.052])*load)
+        p.rotate('Bip01_Spine',rot([0,1,0],turn)@rot([1,0,0],-.13*load))
+        calf=contact('Bip01_R_Calf')
+        hook=curve(t,[(0,feet[1]),(.40,feet[1]),(.77,[-.18,.18,-.12]),
+                      (impact,calf+[.015,-.075,.015]),(1.38,[.038,.18,-.20]),
+                      (1.78,[-.06,.10,-.09]),(2.20,feet[1])])
+        p.legs(feet[0],hook)
+        palm=contact('Bip01_L_UpperArm',(0,-.012,.03))
+        left=curve(t,[(0,hands[0]),(.65,palm),(impact,palm),(1.45,[.13,.58,-.12]),(2.15,hands[0])])
+        right=curve(t,[(0,hands[1]),(.60,[-.14,.60,-.085]),(impact,[-.18,.57,.012]),(2.15,hands[1])])
+        p.arms(left,right,tuck=.58)
+        p.hand('L',[0,-.3,-1],.32*load)
+    elif kind=='Shove':
+        # Dip, drive both palms forwards with the torso, then catch the
+        # weight on the lead foot as the victim falls backwards.
+        dip=float(curve(t,[(0,0),(.54,1),(impact,.32),(1.22,.45),(2.1,0)]))
+        drive=float(curve(t,[(0,0),(.50,-.22),(impact,1),(1.12,1),(1.72,.25),(2.2,0)]))
+        p.translate('Bip01',np.array([.022*drive,-.068*dip,-.075*drive]))
+        p.rotate('Bip01_Spine',rot([1,0,0],-.19*drive))
+        lead=curve(t,[(0,feet[0]),(.48,feet[0]+[0,.032,-.035]),(.76,feet[0]+[0,0,-.095]),
+                      (1.6,feet[0]+[0,0,-.095]),(1.92,feet[0]+[0,.025,-.05]),(2.18,feet[0])])
+        p.legs(lead,feet[1])
+        chest=contact('Bip01_Spine1',(0,.035,-.04))
+        palms=[]
+        for sign,rest in [(1,hands[0]),(-1,hands[1])]:
+            strike=chest+np.array([sign*.060,0,0])
+            palms.append(curve(t,[(0,rest),(.48,[sign*.115,.636,-.088]),(.62,[sign*.115,.64,-.09]),
+                                  (impact,strike),(1.04,strike),(1.39,[sign*.12,.61,-.12]),(2.12,rest)]))
+        p.arms(*palms,tuck=.66)
+        for side in ['L','R']:p.hand(side,[0,.35,-1],.25*max(0,drive))
+    elif kind=='Neck':
         reach=float(curve(t,[(0,0),(.55,1),(1.5,1),(2.5,0),(duration,0)]))
         twist=float(curve(t,[(0,0),(.96,0),(1.30,1),(1.6,.65),(2.5,0)]))
         p.translate('Bip01',np.array([-.025*twist,-.032*reach,-.055*reach]))
@@ -378,6 +435,6 @@ def build():
                 death=[make_pose(bones,kind,role,impact+f/fps) for f in range(round((duration-impact)*fps)+1)]
                 write_x(out/('VF_Death_'+kind+'.x'),bones,death,'VF_Death_'+kind,fps)
     (preview/'poses.json').write_text(json.dumps(manifest,separators=(',',':')),encoding='utf-8')
-    print('Authored 6 paired clips and 3 continuous death segments.')
+    print(f'Authored {len(TIMING)*2} paired clips and {len(TIMING)} death segments.')
 
 if __name__=='__main__': build()
