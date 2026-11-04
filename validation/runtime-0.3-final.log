@@ -1,0 +1,35 @@
+LOG  : Lua          f:0> [VF-LAB] paired world started
+LOG  : Lua          f:1200> [VF-LAB] capture trigger received
+LOG  : Lua          f:1380> [VF-LAB] case=Neck spawned alive=true
+LOG  : Lua          f:1560> [VF-LAB] case=Neck selected=VF_Player_Neck valid=true state=idle
+LOG  : Lua          f:1560> [VF] queued VF_Player_Neck
+LOG  : Lua          f:1560> [VF-LAB] state=idle death= playing=false
+LOG  : Lua          f:1594> [VF] start VF_Player_Neck
+LOG  : Lua          f:1750> [VF] impact VF_Player_Neck alive=false
+LOG  : Lua          f:1751> [VF-LAB] state=falldown death=Neck playing=false
+LOG  : Lua          f:1752> [VF-LAB] state=falldown-speardeath1 death=Neck playing=false
+LOG  : Lua          f:1953> [VF] resting pose Neck
+LOG  : Lua          f:1958> [VF] finished
+LOG  : Lua          f:1966> [VF-LAB] state=onground death=Neck playing=true
+LOG  : Lua          f:2160> [VF-LAB] RESULT Neck alive=false active=false
+LOG  : Lua          f:2280> [VF-LAB] case=Knee spawned alive=true
+LOG  : Lua          f:2460> [VF-LAB] case=Knee selected=VF_Player_Knee valid=true state=idle
+LOG  : Lua          f:2460> [VF] start VF_Player_Knee
+LOG  : Lua          f:2460> [VF] queued VF_Player_Knee
+LOG  : Lua          f:2460> [VF-LAB] state=idle death= playing=false
+LOG  : Lua          f:2666> [VF] impact VF_Player_Knee alive=false
+LOG  : Lua          f:2667> [VF-LAB] state=falldown death=Knee playing=false
+LOG  : Lua          f:2668> [VF-LAB] state=falldown-speardeath1 death=Knee playing=false
+LOG  : Lua          f:2832> [VF] resting pose Knee
+LOG  : Lua          f:2836> [VF] finished
+LOG  : Lua          f:2842> [VF-LAB] state=onground death=Knee playing=true
+LOG  : Lua          f:3060> [VF-LAB] RESULT Knee alive=false active=false
+LOG  : Lua          f:3180> [VF-LAB] case=Knife spawned alive=true
+LOG  : Lua          f:3360> [VF-LAB] case=Knife selected=VF_Player_Knife valid=true state=onground
+LOG  : Lua          f:3360> [VF] queued VF_Player_Knife
+LOG  : Lua          f:3360> [VF-LAB] state=onground death= playing=false
+LOG  : Lua          f:3431> [VF] start VF_Player_Knife
+LOG  : Lua          f:3572> [VF] impact VF_Player_Knife alive=false
+LOG  : Lua          f:3794> [VF] finished
+LOG  : Lua          f:3960> [VF-LAB] RESULT Knife alive=false active=false
+LOG  : Lua          f:4080> [VF-LAB] ALL CASES FINISHED

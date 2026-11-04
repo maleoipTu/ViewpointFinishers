@@ -1,0 +1,45 @@
+"""Continuity, contact and floor checks on the authored paired animation."""
+import sys,json
+from pathlib import Path
+import numpy as np
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
+from choreography import skeleton,make_pose,TIMING
+bones=skeleton();results={}
+for kind,(duration,impact) in TIMING.items():
+    p=make_pose(bones,kind,'Player',impact)
+    v=make_pose(bones,kind,'Victim',impact)
+    head=v.pos('Bip01_Head')+np.array([0,.045 if kind=='Neck' else .025,0])
+    if kind=='Knee':head[[0,2]]*=-1
+    head[2]-={'Neck':.325,'Knee':.36,'Knife':.5}[kind]
+    distances={side:float(np.linalg.norm(p.pos('Bip01_'+side+'_Hand')-head)) for side in ['L','R']}
+    assert distances['R']<(.15 if kind=='Knife' else .10),(kind,distances)
+    if kind=='Neck':assert distances['L']<.10,distances
+    final=make_pose(bones,kind,'Victim',duration)
+    lowest=min(final.pos(b['name'])[1] for b in bones if b['name'].endswith(('_Hand','_Foot','_Head')))
+    assert lowest>-.005,(kind,lowest)
+    a=make_pose(bones,kind,'Player',0);b=make_pose(bones,kind,'Player',duration)
+    assert np.max(np.abs(a.world-b.world))<1e-6,kind
+    # The exported death segment is sampled from this same victim motion at impact.
+    before=make_pose(bones,kind,'Victim',impact-1e-4)
+    after=make_pose(bones,kind,'Victim',impact+1e-4)
+    assert np.max(np.abs(before.world-after.world))<.005,kind
+    worst_wrist=0;worst_step=0;previous=None
+    for frame in range(round(duration*30)+1):
+        sample=make_pose(bones,kind,'Player',frame/30);local=sample.local()
+        for side in ['L','R']:
+            idx=sample.idx['Bip01_'+side+'_Hand']
+            delta=local[idx][:3,:3]@np.linalg.inv(bones[idx]['local'][:3,:3])
+            angle=float(np.degrees(np.arccos(np.clip((np.trace(delta)-1)/2,-1,1))))
+            worst_wrist=max(worst_wrist,angle)
+            for part in ['UpperArm','Forearm','Hand']:
+                idx=sample.idx['Bip01_'+side+'_'+part]
+                if previous is not None:
+                    delta=local[idx][:3,:3]@np.linalg.inv(previous[idx][:3,:3])
+                    worst_step=max(worst_step,float(np.degrees(np.arccos(np.clip((np.trace(delta)-1)/2,-1,1)))))
+        previous=local
+    assert worst_wrist<26,(kind,'wrist overextension',worst_wrist)
+    assert worst_step<35,(kind,'arm flip between adjacent frames',worst_step)
+    results[kind]={'hand_contact_distance_rig_units':distances,'resting_lowest_joint':float(lowest),'entry_matches_recovery':True,'impact_to_death_continuous':True,'max_wrist_rotation_degrees':worst_wrist,'max_arm_step_degrees_at_30fps':worst_step}
+out=Path(__file__).resolve().parents[1]/'validation/choreography.json'
+out.write_text(json.dumps(results,indent=2),encoding='utf-8')
+print(json.dumps(results))

@@ -1,0 +1,9 @@
+UI_RU = {
+    UI_VF_NoTarget = "Подойдите ближе к живому зомби.",
+    UI_VF_NotReady = "Остановитесь и завершите текущее действие.",
+    UI_VF_Exhausted = "Недостаточно выносливости для добивания.",
+    UI_VF_SinglePlayer = "Добивания пока доступны только в одиночной игре.",
+    UI_VF_Side = "Для захвата подойдите сзади; для подсечки — спереди.",
+    UI_options_binding_VF_Finish = "Выполнить добивание",
+    UI_options_binding_[ViewpointFinishers] = "Добивания Viewpoint",
+}

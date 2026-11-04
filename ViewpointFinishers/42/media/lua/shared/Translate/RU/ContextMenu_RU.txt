@@ -1,0 +1,11 @@
+ContextMenu_RU = {
+    ContextMenu_VF_Stomp = "Добить рядом лежащего зомби: ногой",
+    ContextMenu_VF_Knife = "Добить рядом лежащего зомби: ножом",
+    ContextMenu_VF_OneHand = "Добить рядом лежащего зомби: оружием",
+    ContextMenu_VF_TwoHand = "Добить рядом лежащего зомби: двуручным оружием",
+    ContextMenu_VF_Heavy = "Добить рядом лежащего зомби: тяжёлым ударом",
+    ContextMenu_VF_Spear = "Добить рядом лежащего зомби: копьём",
+    ContextMenu_VF_Neck = "Захват сзади: свернуть шею",
+    ContextMenu_VF_Knee = "Ударить по ноге и добить в голову",
+    ContextMenu_VF_GroundKnife = "Прижать лежащего и добить ножом",
+}

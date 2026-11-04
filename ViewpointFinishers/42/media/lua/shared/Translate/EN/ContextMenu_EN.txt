@@ -1,0 +1,11 @@
+ContextMenu_EN = {
+    ContextMenu_VF_Stomp = "Finish nearby zombie: stomp",
+    ContextMenu_VF_Knife = "Finish nearby zombie: knife",
+    ContextMenu_VF_OneHand = "Finish nearby zombie: weapon strike",
+    ContextMenu_VF_TwoHand = "Finish nearby zombie: two-handed strike",
+    ContextMenu_VF_Heavy = "Finish nearby zombie: heavy strike",
+    ContextMenu_VF_Spear = "Finish nearby zombie: spear",
+    ContextMenu_VF_Neck = "Rear neck takedown",
+    ContextMenu_VF_Knee = "Leg kick and finishing strike",
+    ContextMenu_VF_GroundKnife = "Pin and finish with knife",
+}

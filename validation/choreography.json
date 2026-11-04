@@ -1,0 +1,35 @@
+{
+  "Neck": {
+    "hand_contact_distance_rig_units": {
+      "L": 0.05643580423808983,
+      "R": 0.06284902544988269
+    },
+    "resting_lowest_joint": 0.1202380141687219,
+    "entry_matches_recovery": true,
+    "impact_to_death_continuous": true,
+    "max_wrist_rotation_degrees": 25.00000000000005,
+    "max_arm_step_degrees_at_30fps": 27.85070604264323
+  },
+  "Knee": {
+    "hand_contact_distance_rig_units": {
+      "L": 0.261904049461477,
+      "R": 0.00943097254982759
+    },
+    "resting_lowest_joint": 0.04243686048878602,
+    "entry_matches_recovery": true,
+    "impact_to_death_continuous": true,
+    "max_wrist_rotation_degrees": 25.00000000000005,
+    "max_arm_step_degrees_at_30fps": 25.756860395151794
+  },
+  "Knife": {
+    "hand_contact_distance_rig_units": {
+      "L": 0.11470754465892283,
+      "R": 0.10545335052232471
+    },
+    "resting_lowest_joint": 0.05589121355253329,
+    "entry_matches_recovery": true,
+    "impact_to_death_continuous": true,
+    "max_wrist_rotation_degrees": 25.00000000000005,
+    "max_arm_step_degrees_at_30fps": 27.38124278753842
+  }
+}

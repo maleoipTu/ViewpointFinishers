@@ -1,0 +1,26 @@
+.lab/
+dist/
+__pycache__/
+backups/
+*.pyc
+*.class
+*.blend1
+.env
+.env.*
+MODLOG.md
+MODDING_PLAN.md
+ViewpointFinishers-demo.gif
+
+# Publish the final animation source and review evidence only.
+animation_source/*
+!animation_source/choreography_animated.blend
+!animation_source/choreography-preview-0.3.gif
+!animation_source/poses.json
+validation/*
+!validation/STATUS.md
+!validation/static.json
+!validation/choreography.json
+!validation/polish-tests.log
+!validation/runtime-0.3-final.log
+!validation/gameplay-preview-0.3.gif
+!validation/arms-final-contact.png

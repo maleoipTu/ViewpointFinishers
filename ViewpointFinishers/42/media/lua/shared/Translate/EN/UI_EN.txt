@@ -1,0 +1,9 @@
+UI_EN = {
+    UI_VF_NoTarget = "Move closer to a living zombie.",
+    UI_VF_NotReady = "Stand still and finish your current action.",
+    UI_VF_Exhausted = "Too exhausted to finish a zombie.",
+    UI_VF_SinglePlayer = "Finishers currently support single player only.",
+    UI_VF_Side = "Approach from behind for a neck hold, or from the front for a leg kick.",
+    UI_options_binding_VF_Finish = "Perform finisher",
+    UI_options_binding_[ViewpointFinishers] = "Viewpoint Finishers",
+}

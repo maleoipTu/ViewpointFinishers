@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<animNode>
+  <m_Name>VF_Victim_Neck</m_Name>
+  <m_AnimName>VF_Victim_Neck</m_AnimName>
+  <m_ConditionPriority>100</m_ConditionPriority>
+  <m_Looped>false</m_Looped>
+  <m_BlendTime>0.2</m_BlendTime>
+  <m_BlendOutTime>0.3</m_BlendOutTime>
+  <m_EarlyTransitionOut>false</m_EarlyTransitionOut>
+  <m_SpeedScale>1</m_SpeedScale>
+  <m_SyncTrackingEnabled>false</m_SyncTrackingEnabled>
+  <m_randomAdvanceFraction>0</m_randomAdvanceFraction>
+  <m_Conditions>
+    <m_Name>VF_Pair</m_Name>
+    <m_Type>STRING</m_Type>
+    <m_Value>Neck</m_Value>
+  </m_Conditions>
+</animNode>
