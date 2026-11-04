@@ -40,6 +40,21 @@ for kind,(duration,impact) in TIMING.items():
     assert worst_wrist<26,(kind,'wrist overextension',worst_wrist)
     assert worst_step<35,(kind,'arm flip between adjacent frames',worst_step)
     results[kind]={'hand_contact_distance_rig_units':distances,'resting_lowest_joint':float(lowest),'entry_matches_recovery':True,'impact_to_death_continuous':True,'max_wrist_rotation_degrees':worst_wrist,'max_arm_step_degrees_at_30fps':worst_step}
+    if kind=='Neck':
+        # Once the head is released, elbows must drop below the shoulders
+        # and stay near the ribs, rather than holding a raised wing pose.
+        max_spread=0;min_drop=1
+        for t in np.arange(1.75,2.61,1/60):
+            sample=make_pose(bones,kind,'Player',t)
+            for side in ['L','R']:
+                shoulder=sample.pos('Bip01_'+side+'_UpperArm')
+                elbow=sample.pos('Bip01_'+side+'_Forearm')
+                max_spread=max(max_spread,abs(elbow[0]-shoulder[0]))
+                min_drop=min(min_drop,shoulder[1]-elbow[1])
+        assert max_spread<.065,('neck release elbows flare out',max_spread)
+        assert min_drop>.075,('neck release elbows stay raised',min_drop)
+        results[kind]['release_max_elbow_spread']=float(max_spread)
+        results[kind]['release_min_elbow_drop']=float(min_drop)
 out=Path(__file__).resolve().parents[1]/'validation/choreography.json'
 out.write_text(json.dumps(results,indent=2),encoding='utf-8')
 print(json.dumps(results))

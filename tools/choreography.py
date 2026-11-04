@@ -80,7 +80,7 @@ class Pose:
             self.rotate(root,new@old.T)
         else:self.rotate(root,align(b-a,elbow-a))
         self.rotate(mid,align(self.pos(tip)-self.pos(mid),a+direction*distance-self.pos(mid)))
-    def arms(self,left,right):
+    def arms(self,left,right,tuck=0):
         for side,target,sign in [('L',left,1),('R',right,-1)]:
             root,mid,tip=['Bip01_'+side+'_'+part for part in ['UpperArm','Forearm','Hand']]
             a,b,c=self.pos(root),self.pos(mid),self.pos(tip)
@@ -89,7 +89,10 @@ class Pose:
             reach=reach*reach*(3-2*reach)
             # Pole follows the shoulder, never crosses the reach line on the
             # way back down, and eases back to the rig's neutral elbow plane.
-            bend=unit(neutral*(1-reach)+unit([sign,.05,.65])*reach)
+            # During a release, lead the elbow down beside the ribs instead
+            # of keeping the outward pole used to reach around a target.
+            active=unit(np.array([sign,.05,.65])*(1-tuck)+np.array([sign*.20,-1,.25])*tuck)
+            bend=unit(neutral*(1-reach)+active*reach)
             self.limb(root,mid,tip,target,a+bend*.5,hinge=True)
         # The game attaches weapon props to separate rig nodes, not to the hand itself.
         for prop,hand in [('Bip01_Prop1','Bip01_R_Hand'),('Bip01_Prop2','Bip01_L_Hand')]:
@@ -277,13 +280,18 @@ def make_pose(bones,kind,role,t):
         p.translate('Bip01',np.array([.012*windup,.008*windup,.018*windup]))
         for side,sign in [('L',1),('R',-1)]:p.rotate('Bip01_'+side+'_Clavicle',rot([0,0,1],sign*.07*reach))
         head=contact('Bip01_Head',(0,.045,0))
-        left=head+rot([0,1,0],-.85*twist)@np.array([.055,-.012,-.004])
-        right=head+rot([0,1,0],-.85*twist)@np.array([-.05,-.035,.015])
+        grip_twist=float(curve(min(t,1.38),[(0,0),(.96,0),(1.30,1),(1.6,.65),(2.5,0)]))
+        left=head+rot([0,1,0],-.85*grip_twist)@np.array([.055,-.012,-.004])
+        right=head+rot([0,1,0],-.85*grip_twist)@np.array([-.05,-.035,.015])
         grip=float(curve(t,[(0,0),(.58,1),(1.38,1),(1.8,0),(duration,0)]))
-        release=float(curve(t,[(0,0),(1.42,0),(1.85,1),(2.65,0)]))
+        # Clear the head, draw the hands toward the chest, then lower them.
+        # The old additive upward/outward arc held both elbows at shoulder
+        # height after the victim was already falling.
+        left=curve(t,[(0,hands[0]),(.58,left),(1.38,left),(1.60,[.10,.72,-.16]),(1.98,[.14,.54,-.035]),(2.5,hands[0]),(duration,hands[0])])
+        right=curve(t,[(0,hands[1]),(.58,right),(1.38,right),(1.55,[-.10,.72,-.18]),(1.92,[-.14,.54,-.045]),(2.45,hands[1]),(duration,hands[1])])
+        tuck=float(curve(t,[(0,0),(1.32,0),(1.72,1),(duration,1)]))
         p.legs(*feet)
-        p.arms(hands[0]*(1-grip)+left*grip+np.array([.07,.16,-.09])*release,
-               hands[1]*(1-grip)+right*grip+np.array([-.07,.16,-.09])*release)
+        p.arms(left,right,tuck=tuck)
         p.hand('L',unit([-.4*grip,-1,.15]),.65*grip);p.hand('R',unit([.4*grip,-1,.15]),.75*grip)
     elif kind=='Knee':
         kick=float(curve(t,[(0,0),(.30,.25),(.58,1),(.86,0),(duration,0)]))

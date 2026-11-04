@@ -7,9 +7,9 @@ font=ImageFont.truetype('C:/Windows/Fonts/arial.ttf',23)
 small=ImageFont.truetype('C:/Windows/Fonts/arial.ttf',15)
 frames=[]
 durations=[]
-capture=root/'.lab/capture-arms-final'
+capture=root/'.lab/capture-neck-release'
 timing={r['i']:r['time'] for r in json.loads((capture/'timing.json').read_text())}
-for label,start,end in [('Захват сзади — сворачивание шеи',52,86),('Удар по ноге и добивание',116,151),('Добивание лежащего ножом',184,221)]:
+for label,start,end in [('Захват сзади — плавное отпускание',50,84),('Удар по ноге и добивание',114,150),('Добивание лежащего ножом',184,222)]:
     for i in range(start,end):
         original=Image.open(capture/f'{i:03}.png').convert('RGB')
         view=original.crop((280,325,820,715)).resize((756,546),Image.Resampling.LANCZOS)
@@ -17,11 +17,10 @@ for label,start,end in [('Захват сзади — сворачивание �
         frame.paste(view,(0,45))
         d=ImageDraw.Draw(frame)
         d.text((16,10),label,font=font,fill='white')
-        d.text((16,598),'Project Zomboid 42.21 + Viewpoint | реальные кадры игры | 0.3.0',font=small,fill='#c5ccd5')
+        d.text((16,598),'Project Zomboid 42.21 + Viewpoint | реальные кадры игры | 0.3.1',font=small,fill='#c5ccd5')
         frames.append(frame)
         durations.append(max(20,round((timing.get(i+1,timing[i]+105)-timing[i])/10)*10))
-frames[0].save(root/'validation/gameplay-preview-0.3.gif',save_all=True,append_images=frames[1:],duration=durations,loop=0,optimize=True)
-frames[14].save(root/'validation/gameplay-neck-0.3.png')
-frames[45].save(root/'validation/gameplay-knee-0.3.png')
-frames[82].save(root/'validation/gameplay-knife-0.3.png')
+frames[0].save(root/'validation/gameplay-preview-0.3.1.gif',save_all=True,append_images=frames[1:],duration=durations,loop=0,optimize=True)
+frames[0].save(root/'validation/neck-release-0.3.1.gif',save_all=True,append_images=frames[1:34],duration=durations[:34],loop=0,optimize=True)
+frames[20].save(root/'validation/neck-release-0.3.1.png')
 print(f'Saved {len(frames)} captured frames, {sum(durations)/1000:.2f} seconds; crop, resize and labels only.')

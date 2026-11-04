@@ -1,4 +1,5 @@
 .lab/
+.codex-remote-attachments/
 dist/
 __pycache__/
 backups/
@@ -15,6 +16,7 @@ ViewpointFinishers-demo.gif
 animation_source/*
 !animation_source/choreography_animated.blend
 !animation_source/choreography-preview-0.3.gif
+!animation_source/choreography-preview-0.3.1.gif
 !animation_source/poses.json
 validation/*
 !validation/STATUS.md
@@ -24,3 +26,7 @@ validation/*
 !validation/runtime-0.3-final.log
 !validation/gameplay-preview-0.3.gif
 !validation/arms-final-contact.png
+!validation/runtime-0.3.1-final.log
+!validation/gameplay-preview-0.3.1.gif
+!validation/neck-release-0.3.1.gif
+!validation/neck-release-0.3.1.png

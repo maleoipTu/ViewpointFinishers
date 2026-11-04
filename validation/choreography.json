@@ -8,7 +8,9 @@
     "entry_matches_recovery": true,
     "impact_to_death_continuous": true,
     "max_wrist_rotation_degrees": 25.00000000000005,
-    "max_arm_step_degrees_at_30fps": 27.85070604264323
+    "max_arm_step_degrees_at_30fps": 23.599358940766372,
+    "release_max_elbow_spread": 0.025452206841149433,
+    "release_min_elbow_drop": 0.10173894151453
   },
   "Knee": {
     "hand_contact_distance_rig_units": {

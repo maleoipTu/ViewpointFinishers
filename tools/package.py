@@ -5,11 +5,11 @@ import hashlib,json
 root=Path(__file__).resolve().parents[1]
 out=root/'dist';out.mkdir(exist_ok=True)
 files=list((root/'ViewpointFinishers').rglob('*'))
-files += [root/'README.md',root/'Install.ps1']
-files += [root/'validation'/name for name in ['STATUS.md','static.json','polish-tests.log','choreography.json','runtime-0.3-final.log','gameplay-preview-0.3.gif']]
+files += [root/'README.md',root/'Install.ps1',root/'CHANGELOG.md']
+files += [root/'validation'/name for name in ['STATUS.md','static.json','polish-tests.log','choreography.json','runtime-0.3-final.log','runtime-0.3.1-final.log','gameplay-preview-0.3.1.gif','neck-release-0.3.1.gif']]
 files=[p for p in files if p.is_file()]
 assert all(p.suffix.lower() not in {'.jar','.dll','.exe','.class'} for p in files)
-archive=out/'ViewpointFinishers-0.3.0.zip'
+archive=out/'ViewpointFinishers-0.3.1.zip'
 with ZipFile(archive,'w',ZIP_DEFLATED,compresslevel=9) as z:
     for file in sorted(files):z.write(file,file.relative_to(root).as_posix())
 with ZipFile(archive) as z:
