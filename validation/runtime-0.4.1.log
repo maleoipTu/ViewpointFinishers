@@ -1,0 +1,12 @@
+LOG  : Lua          f:0> [VF-LAB] paired world started
+LOG  : General      f:0> [VF-LAB] Accepted ready prompt in test world
+LOG  : Lua          f:30> [VF-LAB] capture trigger received
+LOG  : Lua          f:210> [VF-LAB] case=Knife spawned alive=true
+LOG  : Lua          f:390> [VF-LAB] case=Knife selected=VF_Player_Knife valid=true state=onground
+LOG  : Lua          f:390> [VF] queued VF_Player_Knife
+LOG  : Lua          f:390> [VF-LAB] state=onground death= playing=false
+LOG  : Lua          f:499> [VF] start VF_Player_Knife
+LOG  : Lua          f:586> [VF] impact VF_Player_Knife alive=false
+LOG  : Lua          f:712> [VF] finished
+LOG  : Lua          f:712> [VF-LAB] RESULT Knife deathObserved=true active=false
+LOG  : Lua          f:952> [VF-LAB] ALL CASES FINISHED

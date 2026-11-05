@@ -127,6 +127,27 @@ class Pose:
     def local(self):
         return [np.linalg.inv(self.world[b['parent']])@self.world[i] if b['parent']>=0 else self.world[i] for i,b in enumerate(self.bones)]
 
+    def reverse_knife(self, weight):
+        # The held knife's long axis is local +Y. Rotate the prop around
+        # the closed grip, keeping the wrist within its normal bend range.
+        index = self.idx['Bip01_Prop1']
+        original = self.world[index].copy()
+        target = np.diag([1., -1., -1.])
+        start_rotation = quaternion(original[:3,:3])
+        end_rotation = quaternion(target)
+        if start_rotation @ end_rotation < 0:
+            end_rotation = -end_rotation
+        angle = math.acos(np.clip(start_rotation @ end_rotation, -1, 1))
+        if angle < 1e-5:
+            blended = start_rotation*(1-weight) + end_rotation*weight
+        else:
+            blended = (start_rotation*math.sin((1-weight)*angle)
+                       + end_rotation*math.sin(weight*angle)) / math.sin(angle)
+        grip = self.pos('Bip01_R_Hand')*.15 + self.pos('Bip01_R_Finger1')*.85
+        origin = grip - target @ np.array([0, .035, 0])
+        self.world[index,:3,:3] = rotation(blended)
+        self.world[index,:3,3] = original[:3,3]*(1-weight) + origin*weight
+
 def curve(t,keys):
     if t<=keys[0][0]: return np.array(keys[0][1],dtype=float)
     for i,((a,x),(b,y)) in enumerate(zip(keys,keys[1:])):
@@ -376,8 +397,10 @@ def make_pose(bones,kind,role,t):
         head=contact('Bip01_Head',(0,.035,0))
         left=curve(t,[(0,hands[0]),(.68,head+np.array([.05,.025,0])),(1.65,head+np.array([.05,.025,0])),(2.25,[.13,.40,-.10]),(duration,hands[0])])
         # A short controlled thrust, held beat, withdrawal, then standing recovery.
-        right=curve(t,[(0,hands[1]),(.72,head+np.array([-.035,.30,.06])),(.93,head+np.array([-.035,.32,.04])),(impact,head+np.array([-.035,.08,0])),(1.36,head+np.array([-.035,.08,0])),(1.68,head+np.array([-.05,.27,.06])),(2.35,[-.12,.40,-.10]),(duration,hands[1])])
+        right=curve(t,[(0,hands[1]),(.35,[-.12,.47,-.19]),(.72,head+np.array([-.08,.39,-.08])),(.93,head+np.array([-.07,.42,-.08])),(impact,head+np.array([-.035,.245,0])),(1.36,head+np.array([-.035,.245,0])),(1.68,head+np.array([-.08,.39,-.06])),(2.35,[-.12,.40,-.10]),(duration,hands[1])])
         p.arms(left,right);p.hand('L',[0,-.3,-1],.2*crouch);p.hand('R',[0,-1,-.05],.85*crouch)
+        grip=float(curve(t,[(0,0),(.25,0),(.64,1),(1.86,1),(2.55,0),(duration,0)]))
+        p.reverse_knife(grip)
     # Avoid a wrist pop at entry, and restore both hands during recovery.
     if t<.18:p=blend_pose(Pose(bones),p,float(curve(t,[(0,0),(.18,1)])))
     if t>duration-.40:p=blend_pose(p,Pose(bones),float(curve(t,[(duration-.4,0),(duration,1)])))

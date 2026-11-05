@@ -63,6 +63,8 @@ Events.OnTick.Add(function()
   victim:setDirectionAngle(front and 180 or 0)
   victim:setUseless(true)
   if cases[caseIndex]=="Knife" then
+   victim:setX(p:getX()); victim:setY(p:getY()+distance)
+   victim:setForwardDirection(0,1); victim:setDirectionAngle(90)
    victim:setFallOnFront(false); victim:setAlwaysKnockedDown(true); victim:knockDown(false)
   end
   phase="prepare"; deadline=tick+180
@@ -84,12 +86,12 @@ Events.OnTick.Add(function()
  if victim and phase=="verify" then
   sawAction=sawAction or VF.active[p]~=nil
   sawDeath=sawDeath or not victim:isAlive()
-  if recordFrames and (cases[caseIndex]=="Sweep" or cases[caseIndex]=="Shove") then
+  if recordFrames and cases[caseIndex]=="Knife" then
    local now=getTimestampMs()
    if VF.active[p] then lastActive=now end
    if now-lastActive<250 and now>=nextFrame then
     nextFrame=now+260
-    getCore():TakeFullScreenshot(string.format("vf040-%s-%.0f.png",cases[caseIndex],now))
+    getCore():TakeFullScreenshot(string.format("vf041-%s-%.0f.png",cases[caseIndex],now))
    end
   end
   local st=victim:getActionStateName()

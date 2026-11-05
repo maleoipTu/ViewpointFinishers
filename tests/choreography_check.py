@@ -16,7 +16,13 @@ for kind,(duration,impact) in TIMING.items():
     if kind in FRONT_FACING:head[[0,2]]*=-1
     head[2]-=PAIR_OFFSET[kind]
     distances={side:float(np.linalg.norm(p.pos('Bip01_'+side+'_Hand')-head)) for side in ['L','R']}
-    if kind=='Sweep':
+    if kind=='Knife':
+        prop=p.world[p.idx['Bip01_Prop1']]
+        tip=(prop@np.array([0,.248,.008,1]))[:3]
+        target=v.pos('Bip01_Head')+np.array([0,.035,-PAIR_OFFSET[kind]])
+        distances={'hunting_knife_tip_to_target':float(np.linalg.norm(tip-target))}
+        assert distances['hunting_knife_tip_to_target']<.06,distances
+    elif kind=='Sweep':
         distances={'boot_to_lower_leg':float(np.linalg.norm(p.pos('Bip01_R_Foot')-head))}
         assert distances['boot_to_lower_leg']<.07,distances
     else:
@@ -48,6 +54,21 @@ for kind,(duration,impact) in TIMING.items():
     assert worst_wrist<26,(kind,'wrist overextension',worst_wrist)
     assert worst_step<35,(kind,'arm flip between adjacent frames',worst_step)
     results[kind]={'contact_distance_rig_units':distances,'resting_lowest_joint':float(lowest),'entry_matches_recovery':True,'impact_to_death_continuous':True,'max_wrist_rotation_degrees':worst_wrist,'max_arm_step_degrees_at_30fps':worst_step}
+    if kind=='Knife':
+        previous_prop=None
+        worst_prop_step=0
+        for frame in range(round(duration*30)+1):
+            sample=make_pose(bones,kind,'Player',frame/30)
+            prop=sample.world[sample.idx['Bip01_Prop1'],:3,:3]
+            if .64<=frame/30<=1.86:
+                assert prop[1,1]<-.99,('knife blade must point down',frame)
+            if previous_prop is not None:
+                delta=prop@np.linalg.inv(previous_prop)
+                worst_prop_step=max(worst_prop_step,float(np.degrees(np.arccos(np.clip((np.trace(delta)-1)/2,-1,1)))))
+            previous_prop=prop
+        assert worst_prop_step<35,('knife flips during regrip',worst_prop_step)
+        results[kind]['blade_down_during_strike']=True
+        results[kind]['max_knife_step_degrees_at_30fps']=worst_prop_step
     if kind=='Neck':
         # Once the head is released, elbows must drop below the shoulders
         # and stay near the ribs, rather than holding a raised wing pose.

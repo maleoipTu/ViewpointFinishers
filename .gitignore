@@ -32,3 +32,5 @@ validation/*
 !validation/neck-release-0.3.1.png
 !validation/new-finishers-0.4.0.gif
 !validation/runtime-0.4.0.log
+!validation/knife-reverse-0.4.1.gif
+!validation/runtime-0.4.1.log
