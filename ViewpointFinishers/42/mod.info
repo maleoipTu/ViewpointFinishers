@@ -1,5 +1,5 @@
 name=Viewpoint Finishers
 id=ViewpointFinishers
-description=Five contextual finishers. K: rear neck hold, leg kick, grounded knife. Shift+K: rear hook sweep or front two-palm knockdown. Single-player for Build 42.21.0 and Project Viewpoint.
-modversion=0.4.1
+description=Five contextual finishers with native physics falls. K: rear neck hold, leg kick, grounded knife. Shift+K: rear hook sweep or front two-palm knockdown. Enable physics hit reactions. Single-player for Build 42.21.0 and Project Viewpoint.
+modversion=0.5.0
 versionMin=42.21.0

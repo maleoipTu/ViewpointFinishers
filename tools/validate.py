@@ -9,11 +9,16 @@ game=Path(r"C:\Program Files (x86)\Steam\steamapps\common\ProjectZomboid")
 clips={p.stem.lower() for p in (game/"media/anims_X").rglob("*") if p.is_file()}
 custom={p.stem.lower() for p in (mod/"42/media/anims_X").rglob("*.x")}
 nodes=list((mod/"42/media/AnimSets").rglob("*.xml"))
-assert len(nodes)==73 and len(custom)==15
+assert len(nodes)==77 and len(custom)==15
 names=set()
 for path in nodes:
     node=ET.parse(path).getroot()
     name=node.findtext("m_Name")
+    if name.startswith('VF_Physics_'):
+        assert path.parent.name=='onground-ragdoll'
+        assert node.findtext('m_isRagdoll')=='true'
+        assert int(node.findtext('m_ConditionPriority'))>=200
+        continue
     # Victim override nodes intentionally appear in several animation states.
     names.add(name)
     assert node.findtext("m_AnimName").lower() in clips|custom,path
@@ -22,7 +27,13 @@ for path in nodes:
     if 'VF_Victim' not in name and 'VF_Death' not in name: assert 0 < events["VF_Impact"] < events["VF_Finished"] < 1
     if 'VF_Death' in name:
         parameters={e.findtext('m_ParameterValue') for e in node.findall('m_Events')}
-        assert {'VF_DeathDone=true','prdDone=true'} <= parameters,path
+        physical=path.parent.name.endswith('-ragdoll') and not name.endswith('_Knife')
+        if physical:
+            assert node.findtext('m_isRagdoll')=='true',path
+            assert 0 < float(node.findtext('m_ragdollStartTimeMin')) <= .1,path
+            assert not {'VF_DeathDone=true','prdDone=true','BodyHitGround'} & parameters,path
+        else:
+            assert {'VF_DeathDone=true','prdDone=true'} <= parameters,path
         assert int(node.findtext('m_ConditionPriority'))>=200,path
 rules=(mod/"42/media/lua/shared/VF/Rules.lua").read_text(encoding="utf-8")
 assert set(re.findall(r'anim="([^"]+)"',rules))=={n for n in names if 'VF_Victim' not in n and 'VF_Death' not in n}

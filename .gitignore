@@ -34,3 +34,6 @@ validation/*
 !validation/runtime-0.4.0.log
 !validation/knife-reverse-0.4.1.gif
 !validation/runtime-0.4.1.log
+!validation/runtime-0.5.0.log
+!validation/ragdoll-0.5.0.gif
+!validation/ragdoll-tests.log

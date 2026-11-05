@@ -30,19 +30,9 @@
     <m_TimePc>0.02</m_TimePc>
     <m_ParameterValue>true</m_ParameterValue>
   </m_Events>
-  <m_Events>
-    <m_EventName>PlaySound</m_EventName>
-    <m_TimePc>0.55</m_TimePc>
-    <m_ParameterValue>BodyHitGround</m_ParameterValue>
-  </m_Events>
-  <m_Events>
-    <m_EventName>SetVariable</m_EventName>
-    <m_TimePc>0.94</m_TimePc>
-    <m_ParameterValue>VF_DeathDone=true</m_ParameterValue>
-  </m_Events>
-  <m_Events>
-    <m_EventName>SetVariable</m_EventName>
-    <m_TimePc>0.94</m_TimePc>
-    <m_ParameterValue>prdDone=true</m_ParameterValue>
-  </m_Events>
+  <m_isRagdoll>true</m_isRagdoll>
+  <m_ragdollStartTimeMin>0.08</m_ragdollStartTimeMin>
+  <m_ragdollStartTimeMax>0.08</m_ragdollStartTimeMax>
+  <m_DeferredBoneName>Bip01</m_DeferredBoneName>
+  <m_deferredBoneAxis>Z</m_deferredBoneAxis>
 </animNode>

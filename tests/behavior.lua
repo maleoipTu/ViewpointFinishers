@@ -51,6 +51,13 @@ local function actor(x,y)
     function a:getVariableBoolean(k) return self[k]==true or self[k]=="true" end
     function a:getVariableString(k) return tostring(self[k] or "") end
     function a:setRagdollFall(v) self.ragdoll=v end
+    function a:isRagdollFall() return self.ragdoll or false end
+    function a:usePhysicHitReaction() return self.physicHit or false end
+    function a:setUsePhysicHitReaction(v) self.physicHit=v end
+    function a:isRagdollSimulationActive() return self.simulating or false end
+    function a:isFullyRagdolling() return self.simulating and self.fullyPhysical end
+    function a:isUpright() return self.upright or false end
+    function a:die() self.corpseCalls=(self.corpseCalls or 0)+1; self.square=nil; self.simulating=false end
     function a:Hit(w,p,damage) self.hits=self.hits+1; self.alive=false; self.damage=damage end
     return a
 end
@@ -115,6 +122,26 @@ z.VF_DeathDone="true";z.state="falldown-speardeath1";TEST_TICK()
 check(z.ragdoll and VF.deaths[z].posed,"resting pose preserved for native corpse")
 z.square=nil;TEST_TICK()
 check(not VF.deaths[z] and not z.VF_Death and z.hitReaction=="","death reaction cleared before pooled zombie is reused")
+check(not z.physicHit,"original physics flag restored after death")
+p,z=pair();z.floor=false;z.state="idle";p.x=z.x-.65
+a=VF.FinishAction:new(p,z);a:start();a:animEvent("VF_Impact","")
+check(z.physicHit,"standing finisher requests native physical hit reaction")
+z.simulating=true;z.VF_DeathDone="true";TEST_TICK()
+check(VF.deaths[z].physics and not z.ragdoll and not z.prdDone,"active physics is never frozen by animation completion")
+TEST_TIME=10000;TEST_TICK()
+check(VF.deaths[z] and z.physicHit,"death watchdog cannot interrupt an active simulation")
+TEST_TIME=1100
+z.simulating=false;TEST_TICK()
+check(z.prdDone=="true","Proper Ragdolls completion waits for settled simulation")
+z.alive=true;TEST_TICK()
+check(not VF.deaths[z] and not z.physicHit and not z.VF_Death,"recycled zombie loses finisher state")
+p,z=pair();z.floor=false;z.state="idle";p.x=z.x-.65
+a=VF.FinishAction:new(p,z);a:start();a:animEvent("VF_Impact","")
+z.simulating=true;z.fullyPhysical=true;TEST_TICK()
+TEST_TIME=5500;TEST_TICK();check(not z.corpseCalls,"ragdoll gets at least five seconds before stabilization")
+z.x=z.x+.2;TEST_TIME=6100;TEST_TICK();check(not z.corpseCalls,"moving ragdoll cannot be frozen")
+TEST_TIME=7800;TEST_TICK();check(z.corpseCalls==1,"settled physical pose uses native death once")
+TEST_TICK();check(not VF.deaths[z] and z.corpseCalls==1,"completed physics watcher is released")
 for _,case in ipairs({{"sweep",-.56},{"shove",.53}}) do
     p,z=pair(); z.floor=false; z.state="idle"; p.x=z.x+case[2]
     local profile=VF.Rules.selectProfile(p,z,true)

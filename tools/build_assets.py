@@ -1,5 +1,6 @@
 """Generate our own AnimSets definitions, referring to clips in the user's game."""
 from pathlib import Path
+from copy import deepcopy
 import xml.etree.ElementTree as ET
 from choreography import TIMING
 
@@ -90,8 +91,35 @@ for kind in PAIRED:
         for key,value in {'m_EventName':event,'m_TimePc':at,'m_ParameterValue':param}.items():add(e,key,value)
     ET.indent(node)
     for state in DEATH_STATES:
+        output=deepcopy(node)
+        if state.endswith('-ragdoll') and kind!='Knife':
+            # Start from the paired contact pose, then let Bullet own the fall.
+            # Start times are seconds, not normalized clip positions.
+            for key,value in {'m_isRagdoll':'true','m_ragdollStartTimeMin':.08,
+                              'm_ragdollStartTimeMax':.08,
+                              'm_DeferredBoneName':'Bip01','m_deferredBoneAxis':'Z'}.items():
+                add(output,key,value)
+            for event in list(output.findall('m_Events')):
+                if event.findtext('m_ParameterValue') in ('VF_DeathDone=true','prdDone=true','BodyHitGround'):
+                    output.remove(event)
+            ET.indent(output)
         directory=MEDIA/'AnimSets/zombie'/state;directory.mkdir(parents=True,exist_ok=True)
-        ET.ElementTree(node).write(directory/f'{name}.xml',encoding='utf-8',xml_declaration=True)
+        ET.ElementTree(output).write(directory/f'{name}.xml',encoding='utf-8',xml_declaration=True)
+
+# Proper Ragdolls replaces the stock grounded ragdoll with a posed animation.
+# Keep the native simulation running for our standing finishers only.
+for kind in PAIRED:
+    if kind=='Knife': continue
+    node=ET.Element('animNode')
+    for key,value in {'m_Name':'VF_Physics_'+kind,'m_ConditionPriority':200,
+                      'm_isRagdoll':'true','m_deferredBoneAxis':'Z',
+                      'm_BlendTime':.08,'m_SpeedScale':1}.items(): add(node,key,value)
+    for var,typ,value in [('VF_Death','STRING',kind),('bDead','BOOL','true')]:
+        cond=ET.SubElement(node,'m_Conditions')
+        for key,val in {'m_Name':var,'m_Type':typ,'m_Value':value}.items(): add(cond,key,val)
+    ET.indent(node)
+    directory=MEDIA/'AnimSets/zombie/onground-ragdoll'
+    ET.ElementTree(node).write(directory/f'VF_Physics_{kind}.xml',encoding='utf-8',xml_declaration=True)
 
 texts = {
     "EN": {

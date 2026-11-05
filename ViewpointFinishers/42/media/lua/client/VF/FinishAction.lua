@@ -35,6 +35,7 @@ function A:start()
     self.oldTimer = self.target:getReanimateTimer()
     self.wasAlwaysDown = self.target:isAlwaysKnockedDown()
     self.oldHitReaction = self.target:getHitReaction() or ""
+    self.oldPhysics = self.target:usePhysicHitReaction()
     self.locked = true
     self.target:setUseless(true)
     if self.target:isOnFloor() then self.target:setAlwaysKnockedDown(true) end
@@ -102,11 +103,17 @@ function A:animEvent(event, parameter)
         self.target:setHitHeadWhileOnFloor(1)
         self.target:setHitLegsWhileOnFloor(false)
         self.target:setHitReaction(self.profile==VF.Rules.profiles.neck and "Uppercut" or "Floor")
+        local standingPair = self.profile.victim and not self.target:isOnFloor()
+        if standingPair then self.target:setUsePhysicHitReaction(true) end
         self.target:Hit(weapon,self.character,1000,false,1,false)
         if self.profile.victim then
-            if not self.target:isOnFloor() then self.target:setHitReaction("HitSpearDeath1") end
+            if standingPair then
+                self.target:setUsePhysicHitReaction(true)
+                self.target:setHitReaction("HitSpearDeath1")
+            end
             VF.deaths[self.target]={start=getTimestampMs(),posed=false,
-                forced=not self.target:isOnFloor(),oldReaction=self.oldHitReaction}
+                kind=self.profile.victim,forced=standingPair,
+                oldReaction=self.oldHitReaction,oldPhysics=self.oldPhysics}
         end
         print("[VF] impact "..self.profile.anim.." alive="..tostring(self.target:isAlive()))
     elseif event == "VF_Finished" then
@@ -145,21 +152,56 @@ Events.OnPlayerDeath.Add(function(p)
     if action then action:cleanup() end
 end)
 
--- Keep the authored resting pose when the native state creates its corpse.
--- This also works without Proper Ragdolls and never constructs a corpse itself.
+-- Native ragdoll states own physics and corpse creation. Only the non-physics
+-- fallback (and an already prone knife victim) uses the authored resting pose.
 Events.OnTick.Add(function()
     for zombie,entry in pairs(VF.deaths) do
-        if zombie:isAlive() or not zombie:getSquare() or getTimestampMs()-entry.start>8000 then
+        if zombie:isAlive() or not zombie:getSquare()
+            or (getTimestampMs()-entry.start>8000 and not zombie:isRagdollSimulationActive()) then
             -- PZ reuses zombie objects. Our forced death reaction must not survive
             -- into the next spawn (a later knockdown would otherwise kill it).
             if entry.forced and zombie:getHitReaction()=="HitSpearDeath1" then
                 zombie:setHitReaction(entry.oldReaction)
             end
             if entry.posed and zombie:isAlive() then zombie:setRagdollFall(false) end
+            if entry.forced then zombie:setUsePhysicHitReaction(entry.oldPhysics) end
             zombie:clearVariable("VF_Death")
             zombie:clearVariable("VF_DeathDone")
             zombie:clearVariable("VF_DeathPlaying")
+            print("[VF] death cleanup "..entry.kind.." physics="..tostring(entry.physics==true)
+                .." active="..tostring(zombie:isRagdollSimulationActive()))
             VF.deaths[zombie]=nil
+        elseif zombie:isRagdollSimulationActive() then
+            if not entry.physics then
+                entry.physics=true
+                entry.physicsStart=getTimestampMs()
+                print("[VF] native ragdoll "..zombie:getVariableString("VF_Death"))
+            end
+            if zombie:isRagdollFall() then
+                -- The engine has already chosen to preserve its physical pose.
+                -- PRD can forget this death now: setting the same flag again is
+                -- harmless, and our grounded node keeps the simulation alive.
+                zombie:setVariable("prdDone","true")
+            end
+            -- Bullet can keep tiny joint tremors awake indefinitely. After at
+            -- least five seconds of physics, a fallen body stationary within
+            -- 0.03 tiles for 1.5 seconds can use the engine's normal die() path.
+            -- That path snapshots the current physical pose, inventory and
+            -- attribution; never substitute an animation or build a body here.
+            local now=getTimestampMs()
+            local x,y,z=zombie:getX(),zombie:getY(),zombie:getZ()
+            if not entry.stillSince or (x-entry.x)^2+(y-entry.y)^2>.0009 or z~=entry.z
+                or zombie:isUpright() or not zombie:isFullyRagdolling() then
+                entry.x,entry.y,entry.z,entry.stillSince=x,y,z,now
+            elseif not entry.finalized and now-entry.physicsStart>=5000 and now-entry.stillSince>=1500 then
+                entry.finalized=true
+                print("[VF] settle physical pose "..entry.kind)
+                zombie:die()
+            end
+        elseif entry.physics then
+            -- RagdollController itself is not exposed to Lua. This character
+            -- method becomes false when the native simulation has ended.
+            zombie:setVariable("prdDone","true")
         elseif not entry.posed and zombie:getVariableBoolean("VF_DeathDone") then
             if zombie:getActionStateName()~="falldown" then zombie:setRagdollFall(true) end
             entry.posed=true

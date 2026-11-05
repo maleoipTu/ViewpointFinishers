@@ -1,0 +1,295 @@
+LOG  : Lua          f:0> [VF-LAB] paired world started
+LOG  : General      f:0> [VF-LAB] Accepted ready prompt in test world
+LOG  : Lua          f:30> [VF-LAB] capture trigger received
+LOG  : Lua          f:210> [VF-LAB] case=Sweep spawned alive=true
+LOG  : Lua          f:390> [VF-LAB] case=Sweep selected=VF_Player_Sweep valid=true state=idle
+LOG  : Lua          f:390> [VF] queued VF_Player_Sweep
+LOG  : Lua          f:390> [VF-LAB] state=idle canRagdoll=true usePhysics=false death= playing=false
+LOG  : Lua          f:418> [VF] start VF_Player_Sweep
+LOG  : Lua          f:515> [VF] impact VF_Player_Sweep alive=false
+LOG  : Lua          f:515> [VF-LAB] state=face-target canRagdoll=true usePhysics=true death=Sweep playing=false
+LOG  : Lua          f:516> [VF-LAB] state=falldown canRagdoll=true usePhysics=true death=Sweep playing=false
+LOG  : Lua          f:517> [VF] native ragdoll Sweep
+LOG  : Lua          f:517> [VF-LAB] PHYSICS Sweep full=false position=10650.0595703125,10635.5,0
+LOG  : Lua          f:517> [VF-LAB] state=falldown-speardeath1-ragdoll canRagdoll=true usePhysics=true death=Sweep playing=true
+LOG  : Lua          f:518> [VF-LAB] state=onground-ragdoll canRagdoll=true usePhysics=true death=Sweep playing=true
+LOG  : Lua          f:527> [VF-LAB] PHYSICS Sweep full=true position=10650.0986328125,10635.44140625,0
+LOG  : Lua          f:537> [VF-LAB] PHYSICS Sweep full=true position=10650.0205078125,10635.341796875,0
+LOG  : Lua          f:547> [VF-LAB] PHYSICS Sweep full=true position=10650.0810546875,10635.28125,0
+LOG  : Lua          f:557> [VF-LAB] PHYSICS Sweep full=true position=10650.134765625,10635.291015625,0
+LOG  : Lua          f:567> [VF-LAB] PHYSICS Sweep full=true position=10650.2548828125,10635.28125,0
+LOG  : Lua          f:577> [VF-LAB] PHYSICS Sweep full=true position=10650.3251953125,10635.3271484375,0
+LOG  : Lua          f:587> [VF-LAB] PHYSICS Sweep full=true position=10650.408203125,10635.3662109375,0
+LOG  : Lua          f:597> [VF-LAB] PHYSICS Sweep full=true position=10650.490234375,10635.357421875,0
+LOG  : Lua          f:607> [VF-LAB] PHYSICS Sweep full=true position=10650.5361328125,10635.357421875,0
+LOG  : Lua          f:617> [VF-LAB] PHYSICS Sweep full=true position=10650.541015625,10635.365234375,0
+LOG  : Lua          f:627> [VF-LAB] PHYSICS Sweep full=true position=10650.5234375,10635.380859375,0
+LOG  : Lua          f:637> [VF-LAB] PHYSICS Sweep full=true position=10650.5205078125,10635.37890625,0
+LOG  : Lua          f:647> [VF-LAB] PHYSICS Sweep full=true position=10650.5205078125,10635.37890625,0
+LOG  : Lua          f:657> [VF-LAB] PHYSICS Sweep full=true position=10650.51953125,10635.37890625,0
+LOG  : Lua          f:667> [VF-LAB] PHYSICS Sweep full=true position=10650.5185546875,10635.380859375,0
+LOG  : Lua          f:668> [VF] finished
+LOG  : Lua          f:677> [VF-LAB] PHYSICS Sweep full=true position=10650.5126953125,10635.384765625,0
+LOG  : Lua          f:687> [VF-LAB] PHYSICS Sweep full=true position=10650.51171875,10635.3857421875,0
+LOG  : Lua          f:697> [VF-LAB] PHYSICS Sweep full=true position=10650.5107421875,10635.3857421875,0
+LOG  : Lua          f:707> [VF-LAB] PHYSICS Sweep full=true position=10650.5107421875,10635.3857421875,0
+LOG  : Lua          f:717> [VF-LAB] PHYSICS Sweep full=true position=10650.5107421875,10635.3857421875,0
+LOG  : Lua          f:727> [VF-LAB] PHYSICS Sweep full=true position=10650.5107421875,10635.3857421875,0
+LOG  : Lua          f:737> [VF-LAB] PHYSICS Sweep full=true position=10650.5107421875,10635.3857421875,0
+LOG  : Lua          f:747> [VF-LAB] PHYSICS Sweep full=true position=10650.5107421875,10635.384765625,0
+LOG  : Lua          f:757> [VF-LAB] PHYSICS Sweep full=true position=10650.5107421875,10635.3828125,0
+LOG  : Lua          f:767> [VF-LAB] PHYSICS Sweep full=true position=10650.5107421875,10635.37890625,0
+LOG  : Lua          f:777> [VF-LAB] PHYSICS Sweep full=true position=10650.51171875,10635.380859375,0
+LOG  : Lua          f:787> [VF-LAB] PHYSICS Sweep full=true position=10650.51171875,10635.37890625,0
+LOG  : Lua          f:797> [VF-LAB] PHYSICS Sweep full=true position=10650.5107421875,10635.37890625,0
+LOG  : Lua          f:807> [VF-LAB] PHYSICS Sweep full=true position=10650.5107421875,10635.37890625,0
+LOG  : Lua          f:817> [VF-LAB] PHYSICS Sweep full=true position=10650.5107421875,10635.37890625,0
+LOG  : Lua          f:827> [VF-LAB] PHYSICS Sweep full=true position=10650.51171875,10635.37890625,0
+LOG  : Lua          f:837> [VF-LAB] PHYSICS Sweep full=true position=10650.51171875,10635.3740234375,0
+LOG  : Lua          f:847> [VF-LAB] PHYSICS Sweep full=true position=10650.5107421875,10635.37109375,0
+LOG  : Lua          f:857> [VF-LAB] PHYSICS Sweep full=true position=10650.5107421875,10635.369140625,0
+LOG  : Lua          f:867> [VF-LAB] PHYSICS Sweep full=true position=10650.5107421875,10635.369140625,0
+LOG  : Lua          f:877> [VF-LAB] PHYSICS Sweep full=true position=10650.5107421875,10635.3662109375,0
+LOG  : Lua          f:887> [VF-LAB] PHYSICS Sweep full=true position=10650.51171875,10635.3603515625,0
+LOG  : Lua          f:897> [VF-LAB] PHYSICS Sweep full=true position=10650.51171875,10635.357421875,0
+LOG  : Lua          f:907> [VF-LAB] PHYSICS Sweep full=true position=10650.51171875,10635.3544921875,0
+LOG  : Lua          f:917> [VF-LAB] PHYSICS Sweep full=true position=10650.51171875,10635.3525390625,0
+LOG  : Lua          f:927> [VF-LAB] PHYSICS Sweep full=true position=10650.517578125,10635.34765625,0
+LOG  : Lua          f:937> [VF-LAB] PHYSICS Sweep full=true position=10650.521484375,10635.3388671875,0
+LOG  : Lua          f:947> [VF-LAB] PHYSICS Sweep full=true position=10650.5234375,10635.330078125,0
+LOG  : Lua          f:957> [VF-LAB] PHYSICS Sweep full=true position=10650.5302734375,10635.318359375,0
+LOG  : Lua          f:967> [VF-LAB] PHYSICS Sweep full=true position=10650.541015625,10635.3056640625,0
+LOG  : Lua          f:977> [VF-LAB] PHYSICS Sweep full=true position=10650.55078125,10635.2958984375,0
+LOG  : Lua          f:987> [VF-LAB] PHYSICS Sweep full=true position=10650.5537109375,10635.29296875,0
+LOG  : Lua          f:997> [VF-LAB] PHYSICS Sweep full=true position=10650.552734375,10635.29296875,0
+LOG  : Lua          f:1007> [VF-LAB] PHYSICS Sweep full=true position=10650.5517578125,10635.29296875,0
+LOG  : Lua          f:1017> [VF-LAB] PHYSICS Sweep full=true position=10650.5517578125,10635.291015625,0
+LOG  : Lua          f:1027> [VF-LAB] PHYSICS Sweep full=true position=10650.55078125,10635.2919921875,0
+LOG  : Lua          f:1037> [VF-LAB] PHYSICS Sweep full=true position=10650.552734375,10635.291015625,0
+LOG  : Lua          f:1047> [VF-LAB] PHYSICS Sweep full=true position=10650.5537109375,10635.29296875,0
+LOG  : Lua          f:1057> [VF-LAB] PHYSICS Sweep full=true position=10650.552734375,10635.291015625,0
+LOG  : Lua          f:1067> [VF-LAB] PHYSICS Sweep full=true position=10650.552734375,10635.2939453125,0
+LOG  : Lua          f:1076> [VF] settle physical pose Sweep
+LOG  : Lua          f:1302> [VF] death cleanup Sweep physics=true active=false
+LOG  : Lua          f:1376> [VF-LAB] RESULT Sweep deathObserved=true nativePhysics=true active=false bodiesAdded=1 simulationActive=false
+LOG  : Lua          f:1616> [VF-LAB] case=Shove spawned alive=true
+LOG  : Lua          f:1796> [VF-LAB] case=Shove selected=VF_Player_Shove valid=true state=idle
+LOG  : Lua          f:1796> [VF] start VF_Player_Shove
+LOG  : Lua          f:1796> [VF] queued VF_Player_Shove
+LOG  : Lua          f:1796> [VF-LAB] state=idle canRagdoll=true usePhysics=false death= playing=false
+LOG  : Lua          f:1905> [VF] impact VF_Player_Shove alive=false
+LOG  : Lua          f:1905> [VF-LAB] state=attack canRagdoll=true usePhysics=true death=Shove playing=false
+LOG  : Lua          f:1906> [VF-LAB] state=falldown canRagdoll=true usePhysics=true death=Shove playing=false
+LOG  : Lua          f:1907> [VF] native ragdoll Shove
+LOG  : Lua          f:1907> [VF-LAB] PHYSICS Shove full=false position=10650.0009765625,10635.5009765625,0
+LOG  : Lua          f:1907> [VF-LAB] state=falldown-speardeath1-ragdoll canRagdoll=true usePhysics=true death=Shove playing=false
+LOG  : Lua          f:1908> [VF-LAB] state=onground-ragdoll canRagdoll=true usePhysics=true death=Shove playing=true
+LOG  : Lua          f:1917> [VF-LAB] PHYSICS Shove full=true position=10649.962890625,10635.505859375,0
+LOG  : Lua          f:1927> [VF-LAB] PHYSICS Shove full=true position=10649.919921875,10635.5751953125,0
+LOG  : Lua          f:1937> [VF-LAB] PHYSICS Shove full=true position=10649.9111328125,10635.6123046875,0
+LOG  : Lua          f:1947> [VF-LAB] PHYSICS Shove full=true position=10649.9267578125,10635.63671875,0
+LOG  : Lua          f:1957> [VF-LAB] PHYSICS Shove full=true position=10649.9521484375,10635.6689453125,0
+LOG  : Lua          f:1967> [VF-LAB] PHYSICS Shove full=true position=10649.927734375,10635.744140625,0
+LOG  : Lua          f:1977> [VF-LAB] PHYSICS Shove full=true position=10649.908203125,10635.7919921875,0
+LOG  : Lua          f:1987> [VF-LAB] PHYSICS Shove full=true position=10649.83984375,10635.7958984375,0
+LOG  : Lua          f:1997> [VF-LAB] PHYSICS Shove full=true position=10649.7529296875,10635.7822265625,0
+LOG  : Lua          f:2007> [VF-LAB] PHYSICS Shove full=true position=10649.669921875,10635.76953125,0
+LOG  : Lua          f:2017> [VF-LAB] PHYSICS Shove full=true position=10649.6005859375,10635.7685546875,0
+LOG  : Lua          f:2027> [VF-LAB] PHYSICS Shove full=true position=10649.482421875,10635.759765625,0
+LOG  : Lua          f:2037> [VF-LAB] PHYSICS Shove full=true position=10649.4287109375,10635.74609375,0
+LOG  : Lua          f:2047> [VF-LAB] PHYSICS Shove full=true position=10649.3876953125,10635.7578125,0
+LOG  : Lua          f:2057> [VF-LAB] PHYSICS Shove full=true position=10649.37109375,10635.7890625,0
+LOG  : Lua          f:2067> [VF-LAB] PHYSICS Shove full=true position=10649.373046875,10635.798828125,0
+LOG  : Lua          f:2077> [VF-LAB] PHYSICS Shove full=true position=10649.3798828125,10635.798828125,0
+LOG  : Lua          f:2087> [VF-LAB] PHYSICS Shove full=true position=10649.3798828125,10635.798828125,0
+LOG  : Lua          f:2093> [VF] finished
+LOG  : Lua          f:2097> [VF-LAB] PHYSICS Shove full=true position=10649.3798828125,10635.798828125,0
+LOG  : Lua          f:2107> [VF-LAB] PHYSICS Shove full=true position=10649.3798828125,10635.798828125,0
+LOG  : Lua          f:2117> [VF-LAB] PHYSICS Shove full=true position=10649.38671875,10635.798828125,0
+LOG  : Lua          f:2127> [VF-LAB] PHYSICS Shove full=true position=10649.3857421875,10635.798828125,0
+LOG  : Lua          f:2137> [VF-LAB] PHYSICS Shove full=true position=10649.3857421875,10635.798828125,0
+LOG  : Lua          f:2147> [VF-LAB] PHYSICS Shove full=true position=10649.3857421875,10635.798828125,0
+LOG  : Lua          f:2157> [VF-LAB] PHYSICS Shove full=true position=10649.3857421875,10635.798828125,0
+LOG  : Lua          f:2167> [VF-LAB] PHYSICS Shove full=true position=10649.3857421875,10635.798828125,0
+LOG  : Lua          f:2177> [VF-LAB] PHYSICS Shove full=true position=10649.3857421875,10635.798828125,0
+LOG  : Lua          f:2187> [VF-LAB] PHYSICS Shove full=true position=10649.3857421875,10635.798828125,0
+LOG  : Lua          f:2197> [VF-LAB] PHYSICS Shove full=true position=10649.3857421875,10635.798828125,0
+LOG  : Lua          f:2207> [VF-LAB] PHYSICS Shove full=true position=10649.3857421875,10635.798828125,0
+LOG  : Lua          f:2217> [VF-LAB] PHYSICS Shove full=true position=10649.3857421875,10635.798828125,0
+LOG  : Lua          f:2227> [VF-LAB] PHYSICS Shove full=true position=10649.38671875,10635.798828125,0
+LOG  : Lua          f:2237> [VF-LAB] PHYSICS Shove full=true position=10649.38671875,10635.798828125,0
+LOG  : Lua          f:2247> [VF-LAB] PHYSICS Shove full=true position=10649.38671875,10635.798828125,0
+LOG  : Lua          f:2257> [VF-LAB] PHYSICS Shove full=true position=10649.38671875,10635.798828125,0
+LOG  : Lua          f:2267> [VF-LAB] PHYSICS Shove full=true position=10649.38671875,10635.798828125,0
+LOG  : Lua          f:2277> [VF-LAB] PHYSICS Shove full=true position=10649.38671875,10635.798828125,0
+LOG  : Lua          f:2287> [VF-LAB] PHYSICS Shove full=true position=10649.38671875,10635.798828125,0
+LOG  : Lua          f:2297> [VF-LAB] PHYSICS Shove full=true position=10649.38671875,10635.798828125,0
+LOG  : Lua          f:2307> [VF-LAB] PHYSICS Shove full=true position=10649.38671875,10635.798828125,0
+LOG  : Lua          f:2317> [VF-LAB] PHYSICS Shove full=true position=10649.38671875,10635.798828125,0
+LOG  : Lua          f:2327> [VF-LAB] PHYSICS Shove full=true position=10649.38671875,10635.798828125,0
+LOG  : Lua          f:2337> [VF-LAB] PHYSICS Shove full=true position=10649.38671875,10635.798828125,0
+LOG  : Lua          f:2347> [VF-LAB] PHYSICS Shove full=true position=10649.38671875,10635.798828125,0
+LOG  : Lua          f:2357> [VF-LAB] PHYSICS Shove full=true position=10649.388671875,10635.7998046875,0
+LOG  : Lua          f:2367> [VF-LAB] PHYSICS Shove full=true position=10649.3955078125,10635.7998046875,0
+LOG  : Lua          f:2377> [VF-LAB] PHYSICS Shove full=true position=10649.3955078125,10635.7998046875,0
+LOG  : Lua          f:2387> [VF-LAB] PHYSICS Shove full=true position=10649.3955078125,10635.7998046875,0
+LOG  : Lua          f:2397> [VF-LAB] PHYSICS Shove full=true position=10649.3955078125,10635.7998046875,0
+LOG  : Lua          f:2407> [VF-LAB] PHYSICS Shove full=true position=10649.3955078125,10635.7998046875,0
+LOG  : Lua          f:2417> [VF-LAB] PHYSICS Shove full=true position=10649.3955078125,10635.7998046875,0
+LOG  : Lua          f:2427> [VF-LAB] state=onground canRagdoll=true usePhysics=false death=Shove playing=true
+LOG  : Lua          f:2726> [VF-LAB] RESULT Shove deathObserved=true nativePhysics=true active=false bodiesAdded=1 simulationActive=false
+LOG  : Lua          f:2848> [VF] death cleanup Shove physics=true active=false
+LOG  : Lua          f:2966> [VF-LAB] case=Neck spawned alive=true
+LOG  : Lua          f:3146> [VF-LAB] case=Neck selected=VF_Player_Neck valid=true state=idle
+LOG  : Lua          f:3146> [VF] start VF_Player_Neck
+LOG  : Lua          f:3146> [VF] queued VF_Player_Neck
+LOG  : Lua          f:3146> [VF-LAB] state=idle canRagdoll=true usePhysics=false death= playing=false
+LOG  : Lua          f:3302> [VF] impact VF_Player_Neck alive=false
+LOG  : Lua          f:3302> [VF-LAB] state=face-target canRagdoll=true usePhysics=true death=Neck playing=false
+LOG  : Lua          f:3303> [VF-LAB] state=falldown canRagdoll=true usePhysics=true death=Neck playing=false
+LOG  : Lua          f:3304> [VF] native ragdoll Neck
+LOG  : Lua          f:3304> [VF-LAB] PHYSICS Neck full=false position=10650.115234375,10635.5009765625,0
+LOG  : Lua          f:3304> [VF-LAB] state=falldown-speardeath1-ragdoll canRagdoll=true usePhysics=true death=Neck playing=false
+LOG  : Lua          f:3305> [VF-LAB] state=onground-ragdoll canRagdoll=true usePhysics=true death=Neck playing=true
+LOG  : Lua          f:3314> [VF-LAB] PHYSICS Neck full=true position=10650.1494140625,10635.5,0
+LOG  : Lua          f:3324> [VF-LAB] PHYSICS Neck full=true position=10650.1962890625,10635.4443359375,0
+LOG  : Lua          f:3334> [VF-LAB] PHYSICS Neck full=true position=10650.1875,10635.44140625,0
+LOG  : Lua          f:3344> [VF-LAB] PHYSICS Neck full=true position=10650.169921875,10635.4169921875,0
+LOG  : Lua          f:3354> [VF-LAB] PHYSICS Neck full=true position=10650.16796875,10635.3828125,0
+LOG  : Lua          f:3364> [VF-LAB] PHYSICS Neck full=true position=10650.1904296875,10635.33984375,0
+LOG  : Lua          f:3374> [VF-LAB] PHYSICS Neck full=true position=10650.255859375,10635.30078125,0
+LOG  : Lua          f:3384> [VF-LAB] PHYSICS Neck full=true position=10650.3193359375,10635.3076171875,0
+LOG  : Lua          f:3394> [VF-LAB] PHYSICS Neck full=true position=10650.3935546875,10635.34375,0
+LOG  : Lua          f:3404> [VF-LAB] PHYSICS Neck full=true position=10650.44921875,10635.39453125,0
+LOG  : Lua          f:3414> [VF-LAB] PHYSICS Neck full=true position=10650.5009765625,10635.451171875,0
+LOG  : Lua          f:3424> [VF-LAB] PHYSICS Neck full=true position=10650.5546875,10635.4765625,0
+LOG  : Lua          f:3434> [VF-LAB] PHYSICS Neck full=true position=10650.5986328125,10635.4873046875,0
+LOG  : Lua          f:3444> [VF-LAB] PHYSICS Neck full=true position=10650.59375,10635.4970703125,0
+LOG  : Lua          f:3454> [VF-LAB] PHYSICS Neck full=true position=10650.58984375,10635.4921875,0
+LOG  : Lua          f:3464> [VF-LAB] PHYSICS Neck full=true position=10650.60546875,10635.474609375,0
+LOG  : Lua          f:3474> [VF-LAB] PHYSICS Neck full=true position=10650.626953125,10635.4560546875,0
+LOG  : Lua          f:3484> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3494> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3504> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3510> [VF] finished
+LOG  : Lua          f:3514> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3524> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3534> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3544> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3554> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3564> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3574> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3584> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3594> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3604> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3614> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3624> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3634> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3644> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3654> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3664> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3674> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3684> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3694> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3704> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3714> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3724> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3734> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3744> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3754> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3764> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3774> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3784> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3794> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3804> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3814> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3824> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3834> [VF-LAB] PHYSICS Neck full=true position=10650.63671875,10635.4482421875,0
+LOG  : Lua          f:3844> [VF-LAB] state=onground canRagdoll=true usePhysics=false death=Neck playing=true
+LOG  : Lua          f:4143> [VF-LAB] RESULT Neck deathObserved=true nativePhysics=true active=false bodiesAdded=1 simulationActive=false
+LOG  : Lua          f:4255> [VF] death cleanup Neck physics=true active=false
+LOG  : Lua          f:4383> [VF-LAB] case=Knee spawned alive=true
+LOG  : Lua          f:4563> [VF-LAB] case=Knee selected=VF_Player_Knee valid=true state=idle
+LOG  : Lua          f:4563> [VF] start VF_Player_Knee
+LOG  : Lua          f:4563> [VF] queued VF_Player_Knee
+LOG  : Lua          f:4563> [VF-LAB] state=idle canRagdoll=true usePhysics=false death= playing=false
+LOG  : Lua          f:4769> [VF] impact VF_Player_Knee alive=false
+LOG  : Lua          f:4769> [VF-LAB] state=attack canRagdoll=true usePhysics=true death=Knee playing=false
+LOG  : Lua          f:4770> [VF-LAB] state=falldown canRagdoll=true usePhysics=true death=Knee playing=false
+LOG  : Lua          f:4771> [VF] native ragdoll Knee
+LOG  : Lua          f:4771> [VF-LAB] PHYSICS Knee full=false position=10650.1845703125,10635.5009765625,0
+LOG  : Lua          f:4771> [VF-LAB] state=falldown-speardeath1-ragdoll canRagdoll=true usePhysics=true death=Knee playing=false
+LOG  : Lua          f:4772> [VF-LAB] state=onground-ragdoll canRagdoll=true usePhysics=true death=Knee playing=true
+LOG  : Lua          f:4781> [VF-LAB] PHYSICS Knee full=true position=10650.0458984375,10635.515625,0
+LOG  : Lua          f:4791> [VF-LAB] PHYSICS Knee full=true position=10649.9111328125,10635.5283203125,0
+LOG  : Lua          f:4801> [VF-LAB] PHYSICS Knee full=true position=10649.89453125,10635.5576171875,0
+LOG  : Lua          f:4811> [VF-LAB] PHYSICS Knee full=true position=10649.853515625,10635.5810546875,0
+LOG  : Lua          f:4821> [VF-LAB] PHYSICS Knee full=true position=10649.787109375,10635.5869140625,0
+LOG  : Lua          f:4831> [VF-LAB] PHYSICS Knee full=true position=10649.701171875,10635.6181640625,0
+LOG  : Lua          f:4841> [VF-LAB] PHYSICS Knee full=true position=10649.599609375,10635.6455078125,0
+LOG  : Lua          f:4851> [VF-LAB] PHYSICS Knee full=true position=10649.4765625,10635.6787109375,0
+LOG  : Lua          f:4861> [VF-LAB] PHYSICS Knee full=true position=10649.375,10635.7265625,0
+LOG  : Lua          f:4871> [VF-LAB] PHYSICS Knee full=true position=10649.328125,10635.74609375,0
+LOG  : Lua          f:4881> [VF-LAB] PHYSICS Knee full=true position=10649.3232421875,10635.755859375,0
+LOG  : Lua          f:4891> [VF-LAB] PHYSICS Knee full=true position=10649.3330078125,10635.7880859375,0
+LOG  : Lua          f:4901> [VF-LAB] PHYSICS Knee full=true position=10649.33984375,10635.8037109375,0
+LOG  : Lua          f:4911> [VF-LAB] PHYSICS Knee full=true position=10649.3486328125,10635.80859375,0
+LOG  : Lua          f:4921> [VF-LAB] PHYSICS Knee full=true position=10649.3486328125,10635.8076171875,0
+LOG  : Lua          f:4931> [VF-LAB] PHYSICS Knee full=true position=10649.3486328125,10635.8076171875,0
+LOG  : Lua          f:4938> [VF] finished
+LOG  : Lua          f:4941> [VF-LAB] PHYSICS Knee full=true position=10649.3486328125,10635.80078125,0
+LOG  : Lua          f:4951> [VF-LAB] PHYSICS Knee full=true position=10649.34765625,10635.7900390625,0
+LOG  : Lua          f:4961> [VF-LAB] PHYSICS Knee full=true position=10649.34765625,10635.7744140625,0
+LOG  : Lua          f:4971> [VF-LAB] PHYSICS Knee full=true position=10649.3388671875,10635.759765625,0
+LOG  : Lua          f:4981> [VF-LAB] PHYSICS Knee full=true position=10649.33984375,10635.759765625,0
+LOG  : Lua          f:4991> [VF-LAB] PHYSICS Knee full=true position=10649.3447265625,10635.759765625,0
+LOG  : Lua          f:5001> [VF-LAB] PHYSICS Knee full=true position=10649.3505859375,10635.76171875,0
+LOG  : Lua          f:5011> [VF-LAB] PHYSICS Knee full=true position=10649.3583984375,10635.76953125,0
+LOG  : Lua          f:5021> [VF-LAB] PHYSICS Knee full=true position=10649.3671875,10635.78515625,0
+LOG  : Lua          f:5031> [VF-LAB] PHYSICS Knee full=true position=10649.375,10635.802734375,0
+LOG  : Lua          f:5041> [VF-LAB] PHYSICS Knee full=true position=10649.3857421875,10635.8193359375,0
+LOG  : Lua          f:5051> [VF-LAB] PHYSICS Knee full=true position=10649.38671875,10635.830078125,0
+LOG  : Lua          f:5061> [VF-LAB] PHYSICS Knee full=true position=10649.39453125,10635.83984375,0
+LOG  : Lua          f:5071> [VF-LAB] PHYSICS Knee full=true position=10649.3955078125,10635.849609375,0
+LOG  : Lua          f:5081> [VF-LAB] PHYSICS Knee full=true position=10649.3994140625,10635.8583984375,0
+LOG  : Lua          f:5091> [VF-LAB] PHYSICS Knee full=true position=10649.40234375,10635.8701171875,0
+LOG  : Lua          f:5101> [VF-LAB] PHYSICS Knee full=true position=10649.404296875,10635.87109375,0
+LOG  : Lua          f:5111> [VF-LAB] PHYSICS Knee full=true position=10649.41015625,10635.87109375,0
+LOG  : Lua          f:5121> [VF-LAB] PHYSICS Knee full=true position=10649.41015625,10635.87109375,0
+LOG  : Lua          f:5131> [VF-LAB] PHYSICS Knee full=true position=10649.41015625,10635.87109375,0
+LOG  : Lua          f:5141> [VF-LAB] PHYSICS Knee full=true position=10649.41015625,10635.87109375,0
+LOG  : Lua          f:5151> [VF-LAB] PHYSICS Knee full=true position=10649.41015625,10635.87109375,0
+LOG  : Lua          f:5161> [VF-LAB] PHYSICS Knee full=true position=10649.41015625,10635.87109375,0
+LOG  : Lua          f:5171> [VF-LAB] PHYSICS Knee full=true position=10649.41015625,10635.87109375,0
+LOG  : Lua          f:5181> [VF-LAB] PHYSICS Knee full=true position=10649.41015625,10635.87109375,0
+LOG  : Lua          f:5191> [VF-LAB] PHYSICS Knee full=true position=10649.41015625,10635.87109375,0
+LOG  : Lua          f:5201> [VF-LAB] PHYSICS Knee full=true position=10649.41015625,10635.87109375,0
+LOG  : Lua          f:5211> [VF-LAB] PHYSICS Knee full=true position=10649.41015625,10635.87109375,0
+LOG  : Lua          f:5221> [VF-LAB] PHYSICS Knee full=true position=10649.41015625,10635.87109375,0
+LOG  : Lua          f:5231> [VF-LAB] PHYSICS Knee full=true position=10649.41015625,10635.87109375,0
+LOG  : Lua          f:5241> [VF-LAB] PHYSICS Knee full=true position=10649.4111328125,10635.87109375,0
+LOG  : Lua          f:5251> [VF-LAB] PHYSICS Knee full=true position=10649.4111328125,10635.87109375,0
+LOG  : Lua          f:5261> [VF-LAB] PHYSICS Knee full=true position=10649.4111328125,10635.87109375,0
+LOG  : Lua          f:5271> [VF-LAB] PHYSICS Knee full=true position=10649.4111328125,10635.87109375,0
+LOG  : Lua          f:5281> [VF-LAB] PHYSICS Knee full=true position=10649.4111328125,10635.87109375,0
+LOG  : Lua          f:5291> [VF-LAB] PHYSICS Knee full=true position=10649.4111328125,10635.87109375,0
+LOG  : Lua          f:5301> [VF-LAB] PHYSICS Knee full=true position=10649.4111328125,10635.87109375,0
+LOG  : Lua          f:5311> [VF-LAB] PHYSICS Knee full=true position=10649.4111328125,10635.87109375,0
+LOG  : Lua          f:5321> [VF-LAB] PHYSICS Knee full=true position=10649.4111328125,10635.87109375,0
+LOG  : Lua          f:5331> [VF-LAB] PHYSICS Knee full=true position=10649.4111328125,10635.87109375,0
+LOG  : Lua          f:5341> [VF-LAB] PHYSICS Knee full=true position=10649.4111328125,10635.87109375,0
+LOG  : Lua          f:5351> [VF-LAB] PHYSICS Knee full=true position=10649.4111328125,10635.87109375,0
+LOG  : Lua          f:5361> [VF-LAB] PHYSICS Knee full=true position=10649.4111328125,10635.87109375,0
+LOG  : Lua          f:5366> [VF] settle physical pose Knee
+LOG  : Lua          f:5666> [VF-LAB] RESULT Knee deathObserved=true nativePhysics=true active=false bodiesAdded=1 simulationActive=false
+LOG  : Lua          f:5722> [VF] death cleanup Knee physics=true active=false
+LOG  : Lua          f:5906> [VF-LAB] case=Knife spawned alive=true
+LOG  : Lua          f:6086> [VF-LAB] case=Knife selected=VF_Player_Knife valid=true state=onground
+LOG  : Lua          f:6086> [VF] queued VF_Player_Knife
+LOG  : Lua          f:6086> [VF-LAB] state=onground canRagdoll=true usePhysics=false death= playing=false
+LOG  : Lua          f:6238> [VF] start VF_Player_Knife
+LOG  : Lua          f:6380> [VF] impact VF_Player_Knife alive=false
+LOG  : Lua          f:6602> [VF] finished
+LOG  : Lua          f:6902> [VF-LAB] RESULT Knife deathObserved=true nativePhysics=false active=false bodiesAdded=1 simulationActive=false
+LOG  : Lua          f:6977> [VF] death cleanup Knife physics=false active=false
+LOG  : Lua          f:7142> [VF-LAB] ALL CASES FINISHED

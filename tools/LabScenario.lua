@@ -7,6 +7,18 @@ local cases={"Sweep","Shove","Neck","Knee","Knife"}
 local lastVictimState=nil
 local recordFrames,nextFrame,lastActive=false,0,0
 local sawAction,sawDeath=false,false
+local sawPhysics,lastPhysicsSample=false,0
+local bodiesBefore=0
+local function nearbyBodies(p)
+ local n=0
+ for x=math.floor(p:getX())-3,math.floor(p:getX())+3 do
+  for y=math.floor(p:getY())-3,math.floor(p:getY())+3 do
+   local sq=getCell():getGridSquare(x,y,0)
+   if sq then n=n+sq:getDeadBodys():size() end
+  end
+ end
+ return n
+end
 local scenario={
  name="VF paired choreography verification",
  startLoc={x=10649,y=10635,z=0},
@@ -29,7 +41,7 @@ Events.OnTick.Add(function()
   if ISCharacterInfoWindow.instance then ISCharacterInfoWindow.instance:setVisible(false) end
   if UIManager.getDebugConsole() then UIManager.getDebugConsole():setVisible(false) end
  end
- if (tick==10 or tick==30) and Viewpoint and Viewpoint.View and Viewpoint.View.next()~="isometric" then
+ if tick<=300 and tick%60==0 and Viewpoint and Viewpoint.View and Viewpoint.View.next()~="isometric" then
   Viewpoint.View.cycle()
  end
  if not runRequested then
@@ -54,6 +66,8 @@ Events.OnTick.Add(function()
   if not spawned or spawned:size()==0 then print("[VF-LAB] SPAWN FAILED"); phase="done"; return end
   victim=spawned:get(0)
   sawAction,sawDeath=false,false
+  sawPhysics=false
+  bodiesBefore=nearbyBodies(p)
   lastVictimState=nil
   local distances={Sweep=.56,Shove=.53,Neck=.65,Knee=.72,Knife=1.0}
   local distance=distances[cases[caseIndex]]
@@ -76,28 +90,37 @@ Events.OnTick.Add(function()
   if not victim:isAlive() then print("[VF-LAB] FAIL: target died before test"); phase="done"; return end
   if cases[caseIndex]=="Knife" and not VF.Rules.targetValid(p,victim) then deadline=tick+120; return end
   VF.tryFinish(p,victim,alternate)
-  phase="verify"; deadline=tick+600
- elseif phase=="verify" and (tick>=deadline or (sawAction and not VF.active[p])) then
+  phase="verify"; deadline=tick+1800
+ elseif phase=="verify" and (tick>=deadline or (sawAction and not VF.active[p] and not victim:isRagdollSimulationActive())) then
+  phase="settling"; deadline=tick+300
+ elseif phase=="settling" and tick>=deadline then
   -- The engine recycles zombie objects. Record the death during this action,
   -- before the same object can represent a different living zombie.
-  print("[VF-LAB] RESULT "..cases[caseIndex].." deathObserved="..tostring(sawDeath).." active="..tostring(VF.active[p]~=nil))
+  print("[VF-LAB] RESULT "..cases[caseIndex].." deathObserved="..tostring(sawDeath).." nativePhysics="..tostring(sawPhysics).." active="..tostring(VF.active[p]~=nil).." bodiesAdded="..(nearbyBodies(p)-bodiesBefore).." simulationActive="..tostring(victim:isRagdollSimulationActive()))
   phase="waiting"; deadline=tick+240
  end
- if victim and phase=="verify" then
+ if victim and (phase=="verify" or phase=="settling") then
   sawAction=sawAction or VF.active[p]~=nil
   sawDeath=sawDeath or not victim:isAlive()
-  if recordFrames and cases[caseIndex]=="Knife" then
+  if victim:isRagdollSimulationActive() then
+   sawPhysics=true
+   if tick>=lastPhysicsSample+10 then
+    lastPhysicsSample=tick
+    print("[VF-LAB] PHYSICS "..cases[caseIndex].." full="..tostring(victim:isFullyRagdolling()).." position="..victim:getX()..","..victim:getY()..","..victim:getZ())
+   end
+  end
+  if recordFrames and phase=="verify" then
    local now=getTimestampMs()
-   if VF.active[p] then lastActive=now end
+    if VF.active[p] or victim:isRagdollSimulationActive() then lastActive=now end
    if now-lastActive<250 and now>=nextFrame then
     nextFrame=now+260
-    getCore():TakeFullScreenshot(string.format("vf041-%s-%.0f.png",cases[caseIndex],now))
+    getCore():TakeFullScreenshot(string.format("vf050-%s-%.0f.png",cases[caseIndex],now))
    end
   end
   local st=victim:getActionStateName()
   if st~=lastVictimState then
    lastVictimState=st
-   print("[VF-LAB] state="..st.." death="..tostring(victim:getVariableString("VF_Death")).." playing="..tostring(victim:getVariableBoolean("VF_DeathPlaying")))
+   print("[VF-LAB] state="..st.." canRagdoll="..tostring(victim:canRagdoll()).." usePhysics="..tostring(victim:usePhysicHitReaction()).." death="..tostring(victim:getVariableString("VF_Death")).." playing="..tostring(victim:getVariableBoolean("VF_DeathPlaying")))
   end
  end
 end)

@@ -1,0 +1,36 @@
+PASS tests\bootstrap.lua
+PASS ViewpointFinishers\42\media\lua\shared\VF\Rules.lua
+PASS ViewpointFinishers\42\media\lua\client\VF\FinishAction.lua
+PASS tests\behavior.lua
+PASS ViewpointFinishers\42\media\lua\client\VF\Input.lua
+PASS tests\input_check.lua
+C:\Users\User\Documents\ChatGPT\���������\ViewpointFinishers\42\media\anims_X\Bob\VF_Death_Knee.x
+clip=VF_Death_Knee duration=44.0 fps=30.0 channels=45
+C:\Users\User\Documents\ChatGPT\���������\ViewpointFinishers\42\media\anims_X\Bob\VF_Death_Knife.x
+clip=VF_Death_Knife duration=58.0 fps=30.0 channels=45
+C:\Users\User\Documents\ChatGPT\���������\ViewpointFinishers\42\media\anims_X\Bob\VF_Death_Neck.x
+clip=VF_Death_Neck duration=54.0 fps=30.0 channels=45
+C:\Users\User\Documents\ChatGPT\���������\ViewpointFinishers\42\media\anims_X\Bob\VF_Death_Shove.x
+clip=VF_Death_Shove duration=51.0 fps=30.0 channels=45
+C:\Users\User\Documents\ChatGPT\���������\ViewpointFinishers\42\media\anims_X\Bob\VF_Death_Sweep.x
+clip=VF_Death_Sweep duration=51.0 fps=30.0 channels=45
+C:\Users\User\Documents\ChatGPT\���������\ViewpointFinishers\42\media\anims_X\Bob\VF_Player_Knee.x
+clip=VF_Player_Knee duration=96.0 fps=30.0 channels=45
+C:\Users\User\Documents\ChatGPT\���������\ViewpointFinishers\42\media\anims_X\Bob\VF_Player_Knife.x
+clip=VF_Player_Knife duration=93.0 fps=30.0 channels=45
+C:\Users\User\Documents\ChatGPT\���������\ViewpointFinishers\42\media\anims_X\Bob\VF_Player_Neck.x
+clip=VF_Player_Neck duration=93.0 fps=30.0 channels=45
+C:\Users\User\Documents\ChatGPT\���������\ViewpointFinishers\42\media\anims_X\Bob\VF_Player_Shove.x
+clip=VF_Player_Shove duration=78.0 fps=30.0 channels=45
+C:\Users\User\Documents\ChatGPT\���������\ViewpointFinishers\42\media\anims_X\Bob\VF_Player_Sweep.x
+clip=VF_Player_Sweep duration=84.0 fps=30.0 channels=45
+C:\Users\User\Documents\ChatGPT\���������\ViewpointFinishers\42\media\anims_X\Bob\VF_Victim_Knee.x
+clip=VF_Victim_Knee duration=96.0 fps=30.0 channels=45
+C:\Users\User\Documents\ChatGPT\���������\ViewpointFinishers\42\media\anims_X\Bob\VF_Victim_Knife.x
+clip=VF_Victim_Knife duration=93.0 fps=30.0 channels=45
+C:\Users\User\Documents\ChatGPT\���������\ViewpointFinishers\42\media\anims_X\Bob\VF_Victim_Neck.x
+clip=VF_Victim_Neck duration=93.0 fps=30.0 channels=45
+C:\Users\User\Documents\ChatGPT\���������\ViewpointFinishers\42\media\anims_X\Bob\VF_Victim_Shove.x
+clip=VF_Victim_Shove duration=78.0 fps=30.0 channels=45
+C:\Users\User\Documents\ChatGPT\���������\ViewpointFinishers\42\media\anims_X\Bob\VF_Victim_Sweep.x
+clip=VF_Victim_Sweep duration=84.0 fps=30.0 channels=45

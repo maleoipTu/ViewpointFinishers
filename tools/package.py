@@ -8,8 +8,9 @@ files=list((root/'ViewpointFinishers').rglob('*'))
 files += [root/'README.md',root/'Install.ps1',root/'CHANGELOG.md']
 files += [root/'validation'/name for name in ['STATUS.md','static.json','polish-tests.log','choreography.json','runtime-0.4.0.log','runtime-0.4.1.log','knife-reverse-0.4.1.gif','new-finishers-0.4.0.gif','gameplay-preview-0.3.1.gif']]
 files=[p for p in files if p.is_file()]
+files += [root/'validation'/name for name in ['runtime-0.5.0.log','ragdoll-tests.log','ragdoll-0.5.0.gif']]
 assert all(p.suffix.lower() not in {'.jar','.dll','.exe','.class'} for p in files)
-archive=out/'ViewpointFinishers-0.4.1.zip'
+archive=out/'ViewpointFinishers-0.5.0.zip'
 with ZipFile(archive,'w',ZIP_DEFLATED,compresslevel=9) as z:
     for file in sorted(files):z.write(file,file.relative_to(root).as_posix())
 with ZipFile(archive) as z:
